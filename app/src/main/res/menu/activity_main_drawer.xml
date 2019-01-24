@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_request"
+            android:icon="?android:attr/actionModePasteDrawable"
+            android:title="Request" />
+        <item
+            android:id="@+id/nav_deptRep"
+            android:icon="@drawable/ic_assignment_ind_black_24dp"
+            android:title="Department Representive" />
+        <item
+            android:id="@+id/nav_deptHead"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Department Head" />
+    </group>
+
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
