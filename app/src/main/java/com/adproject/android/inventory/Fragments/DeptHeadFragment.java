@@ -18,10 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adproject.android.inventory.Adapter.UseraAdpter;
+import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.Entity.User;
 import com.adproject.android.inventory.R;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,16 +37,20 @@ public class DeptHeadFragment extends Fragment {
     Spinner spinner;
     User u;
     String userid;
+    String deptid;
     String selcetid;
     int Year1 = 1990, Month1=1,Day1=1;
     int Year2 = 2200, Month2 =1 ,Day2=1;
+    String startDate;
+    String endDate;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_depthead, container, false);
+        View v = inflater.inflate(R.layout.fragment_dept_head, container, false);
         userid = (String)getArguments().getSerializable("userid");
-        GetEmployee(userid);
-        GetHead(userid);
+        deptid = getActivity().getIntent().getExtras().getString("dept");
+        GetEmployee(deptid);
+        GetHead(deptid);
         return(v);
     }
 
@@ -71,8 +79,6 @@ public class DeptHeadFragment extends Fragment {
         Button save = getActivity().findViewById(R.id.buttonDeptHeadSave);
 
         final TextView startdate = getActivity().findViewById(R.id.editStart);
-
-
         final TextView enddate = getActivity().findViewById(R.id.editEnd);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,7 @@ public class DeptHeadFragment extends Fragment {
                 Year1 =1990;Month1 =01;Day1=01;
                 showDatePickerDialog(getActivity(),startdate,0,Year2,Month2,Day2);
 
+
             }
         });
         btnEnd.setOnClickListener(new View.OnClickListener() {
@@ -88,16 +95,25 @@ public class DeptHeadFragment extends Fragment {
             public void onClick(View v) {
                 Year2 =2200;Month2 =01;Day2=01;
                 showDatePickerDialog(getActivity(),enddate,1,Year1,Month1,Day1);
+
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(u!=null){
-                    Save(selcetid);
+                    startDate=startdate.getText().toString();
+                    endDate = enddate.getText().toString();
+                    if((startDate!=null)&&(endDate!=null)) {
+                        Save(selcetid);
+                    }
+                    else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please select start date and end date",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(getActivity().getApplicationContext(), "wait...",
+                    Toast.makeText(getActivity().getApplicationContext(), "Please select an employee",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -138,17 +154,17 @@ public class DeptHeadFragment extends Fragment {
 
     void GetHead(String id){
         new AsyncTask<String,Void,User>() {
-            @Override
-            protected User doInBackground(String... voids) {
-                List<User> users = User.ReadUser(voids[0]);
-                User head = new User("","","","","","");
-                for(User u : users){
-                    if(u.get("UserType").equals("Manager")){
-                        head=u;
-                    }
-                }
-                return head;
-            }
+             @Override
+             protected User doInBackground(String... voids) {
+                 List<User> users1 = Department.ReadUserByDeptID(voids[0]);
+                        User user = new User("","","","","","");
+                        for(User u : users1){
+                            if((u.get("UserType").equals("DeptHead"))){
+                                user = u;
+                            }
+                        }
+                  return user;
+             }
 
             @Override
             protected void onPostExecute(User user) {
@@ -167,10 +183,11 @@ public class DeptHeadFragment extends Fragment {
         new AsyncTask<String,Void,List<User>>() {
             @Override
             protected List<User> doInBackground(String... voids) {
-                List<User> users1 = User.ReadUser(voids[0]);
+                List<User> users1 = Department.ReadUserByDeptID(voids[0]);
                 List<User> users = new ArrayList<>();
                 for(User u : users1){
-                    if(!u.get("UserType").equals("Manager")){
+                    String type = u.get("UserType");
+                    if(!(type.equals("DeptRep"))){
                         users.add(u);
                     }
                 }
@@ -192,19 +209,25 @@ public class DeptHeadFragment extends Fragment {
     }
 
     void Save(String id){
-        String url = "https://inventoryaandroid.azurewebsites.net/DepManager/saveNewRep?dropdown1="+id;
+        String url = "http://inventory123.azurewebsites.net/DepManager/saveDepHead?dropdown1="+id+"&date1="+startDate+"&date2="+endDate;
         new AsyncTask<String, Void,Boolean>(){
             @Override
             protected Boolean doInBackground(String... strings) {
                 try {
                     URL u = new URL(strings[0]);
                     HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-                    conn.setRequestMethod("GET");
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                    conn.setUseCaches (true);
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
                     conn.connect();
-                    String response = conn.getResponseMessage();
-                    conn.disconnect();
-                    if(response.equals("OK")) {
-
+                    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+                    out.flush();
+                    out.close();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    in.close();
+                    if(conn.getResponseMessage().equals("OK")) {
                         return true;
                     }
                     else {
@@ -215,11 +238,9 @@ public class DeptHeadFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();return false;
                 }
-
             }
             @Override
             protected void onPostExecute(Boolean aBoolean) {
-                //super.onPostExecute(aBoolean);
                 Toast.makeText(getActivity().getApplicationContext(), aBoolean.toString(),
                         Toast.LENGTH_SHORT).show();
             }

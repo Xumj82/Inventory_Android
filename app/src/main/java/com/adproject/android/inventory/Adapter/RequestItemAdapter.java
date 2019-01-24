@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Entity.Request;
@@ -45,7 +44,7 @@ public class RequestItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater _LayoutInflater=LayoutInflater.from(mContext);
-        convertView=_LayoutInflater.inflate(R.layout.requestitemrow, null);
+        convertView=_LayoutInflater.inflate(R.layout.item_row, null);
         if(convertView!=null)
         {
             TextView _TextView1=(TextView)convertView.findViewById(R.id.textDetailItemName);

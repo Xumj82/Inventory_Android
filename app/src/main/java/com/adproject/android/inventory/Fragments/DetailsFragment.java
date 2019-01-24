@@ -1,6 +1,5 @@
 package com.adproject.android.inventory.Fragments;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adproject.android.inventory.Adapter.RequestAdapter;
 import com.adproject.android.inventory.Adapter.RequestItemAdapter;
 import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
@@ -26,7 +24,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +37,7 @@ public class DetailsFragment extends Fragment {
     List<Request> requests;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_details, container, false);
+        View v = inflater.inflate(R.layout.fragment_request_details, container, false);
         getActivity().setTitle("Request Details");
         Bundle arg = getArguments();
         HashMap<String,String> request = (HashMap<String,String>) arg.getSerializable("details");
@@ -109,7 +106,7 @@ public class DetailsFragment extends Fragment {
                     JSONObject J1 = new JSONObject();
                     J1.put("orderId", r.get("OrderID"));
                     J1.put("requestStatus", status);
-                    J1.put("remarks",remarks);
+                    J1.put("reason",remarks);
                     body.add(J1);
                 }
                 URL Url = new URL(url);

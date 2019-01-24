@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Entity.Request;
-import com.adproject.android.inventory.Entity.User;
 import com.adproject.android.inventory.R;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class RequestAdapter extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater _LayoutInflater=LayoutInflater.from(mContext);
-        convertView=_LayoutInflater.inflate(R.layout.requestrow1, null);
+        convertView=_LayoutInflater.inflate(R.layout.request_row, null);
         if(convertView!=null)
         {
             TextView _TextView1=(TextView)convertView.findViewById(R.id.requestrow1);
