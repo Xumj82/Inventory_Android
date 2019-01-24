@@ -79,9 +79,8 @@ public class Request extends HashMap<String, String> {
             Log.e("Request", "JSONArray error");
         }
 
-        String userdeptid = id;
         for(Request l : list){
-            if(l.get("Department").equals(userdeptid)){
+            if(l.get("Department").equals(id)){
                 list1.add(l);
             }
         }

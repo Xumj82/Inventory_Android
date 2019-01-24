@@ -44,7 +44,7 @@ public class DetailsFragment extends Fragment {
         getActivity().setTitle("Request Details");
         Bundle arg = getArguments();
         HashMap<String,String> request = (HashMap<String,String>) arg.getSerializable("details");
-        userid = getActivity().getIntent().getExtras().getString("userid");
+        userid = request.get("UserID");
         deptid = request.get("OrderID");
         if (arg != null) {
 

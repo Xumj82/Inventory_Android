@@ -31,10 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity
-            android:name=".SignaturepadActivity"
-            android:label="Signaturepad"
-            />
 
     </application>
 

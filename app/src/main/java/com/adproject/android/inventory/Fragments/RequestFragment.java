@@ -89,7 +89,7 @@ public class RequestFragment extends ListFragment{
                 List<Request> l3 = new ArrayList<>();
                 l1 = Request.ReadOrderByDept(params[0]);
                 for(Request r : l1){
-                    l2 = Request.ReadRequestByOrderIDUserID(r.get("Department"),userid);
+                    l2 = Request.ReadRequestByOrderIDUserID(r.get("Department"),r.get("UserID"));
                     if(!l2.equals(null)){
                         l3.add(r);
                     }
