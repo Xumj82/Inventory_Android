@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -153,7 +154,7 @@ public class DeptHeadFragment extends Fragment {
     }
 
     void GetHead(String id){
-        new AsyncTask<String,Void,User>() {
+        new AsyncTask<String,Integer,User>() {
              @Override
              protected User doInBackground(String... voids) {
                  List<User> users1 = Department.ReadUserByDeptID(voids[0]);
@@ -222,11 +223,6 @@ public class DeptHeadFragment extends Fragment {
                     conn.setDoOutput(true);
                     conn.setDoInput(true);
                     conn.connect();
-                    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.flush();
-                    out.close();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    in.close();
                     if(conn.getResponseMessage().equals("OK")) {
                         return true;
                     }

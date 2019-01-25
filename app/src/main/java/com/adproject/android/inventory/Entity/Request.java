@@ -77,6 +77,7 @@ public class Request extends HashMap<String, String> {
             }
         } catch (Exception e) {
             Log.e("Request", "JSONArray error");
+            e.printStackTrace();
         }
 
         for(Request l : list){

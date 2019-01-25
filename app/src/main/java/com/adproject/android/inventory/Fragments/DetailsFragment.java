@@ -94,7 +94,7 @@ public class DetailsFragment extends Fragment {
     }
 
     void saveStatus(final List<Request> requestlist, final String remarks, final String status) {
-        final String url = "https://inventoryaandroid.azurewebsites.net/DepManager/SaveRequestStatus";
+        final String url = "https://inventory123.azurewebsites.net/DepManager/SaveRequestStatus";
         new AsyncTask<String, Void,Boolean>(){
             @Override
             protected Boolean doInBackground(String... strings) {

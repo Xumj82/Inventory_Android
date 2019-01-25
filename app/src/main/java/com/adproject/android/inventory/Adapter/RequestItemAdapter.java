@@ -10,20 +10,14 @@ import android.widget.TextView;
 import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RequestItemAdapter extends BaseAdapter {
-    private List<Request> requests = new ArrayList<>();
+    private List<Request> requests;
     private Context mContext;
 
     public RequestItemAdapter(Context mContext, List<Request> mList) {
         this.mContext = mContext;
-//        for (Request request : mList){
-//            if(request.get("Status").equals("Unapproved")){
-//                this.requests.add(request);
-//            }
-//        }
         requests = mList;
     }
     @Override

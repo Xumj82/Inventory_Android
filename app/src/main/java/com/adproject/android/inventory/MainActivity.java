@@ -1,6 +1,7 @@
 package com.adproject.android.inventory;
 
 
+import android.app.Activity;
 import  android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.adproject.android.inventory.Connection.Logout;
 import com.adproject.android.inventory.Fragments.DeptHeadFragment;
 import com.adproject.android.inventory.Fragments.DeptRepFragment;
 import com.adproject.android.inventory.Fragments.DetailsFragment;
@@ -154,10 +156,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             args.putSerializable("userid", userid);
             depthead.setArguments(args);
             fm.beginTransaction().replace(R.id.conten_frame,depthead).addToBackStack(null).commit();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            Logout logout = new Logout();
+            logout.Logout();
+            final Intent login = new Intent(this,LoginActivity.class);
+            startActivity(login);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

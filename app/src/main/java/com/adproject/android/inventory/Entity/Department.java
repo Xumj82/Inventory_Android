@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Department extends HashMap<String,String> {
-    static String host = "inventorywebapi2019.azurewebsites.net/";
+    static String host = "inventorywebapi2019.azurewebsites.net";
     static String baseURL = String.format("http://%s/api/Department", host);
     List<User> userList = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class Department extends HashMap<String,String> {
                 JSONObject b = a.getJSONObject(i);
                 if(b.getString("DepartmentID").equals(id)) {
                    JSONArray  c = b.getJSONArray("AspNetUsers2");
-                   for (int j=0;j<b.length();j++){
+                   for (int j=0;j<c.length();j++){
                        JSONObject d = c.getJSONObject(j);
                        list.add(new User(
                                d.getString("Name"),
@@ -73,6 +73,7 @@ public class Department extends HashMap<String,String> {
             }
         } catch (Exception e) {
             Log.e("User", "JSONArray error");
+            e.printStackTrace();
         }
 
         return(list);

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -81,7 +82,7 @@ public class RequestFragment extends ListFragment{
     }
 
     public void getRequests(String id){
-        new AsyncTask<String, Void, List<Request>>() {
+        new AsyncTask<String, Integer, List<Request>>() {
             @Override
             protected List<Request> doInBackground(String... params) {
                 List<Request> l1 = new ArrayList<>();
@@ -96,6 +97,7 @@ public class RequestFragment extends ListFragment{
                 }
                 return  l3;
             }
+
             @Override
             protected void onPostExecute(List<Request> result) {
                 try {

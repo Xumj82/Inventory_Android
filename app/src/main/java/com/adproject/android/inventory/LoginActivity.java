@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
@@ -349,13 +349,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 DataOutputStream wr = new DataOutputStream( conn.getOutputStream());
                 wr.write(postData);
                 conn.connect();
+                String a = conn.getResponseMessage();
                 is = conn.getInputStream();
                 String s = JSONParser.readStream(is);
                 String ss = s.split("\n")[0];
                 String[] sss= ss.split("/",4);
-                mUserID = sss[1].split(":")[1];
-                mName = sss[2].split(":")[1];
-                mDept = sss[3].split(":")[1];
+                mUserID = sss[1];
+                mName = sss[2];
+                mDept = sss[3];
                 if(s.contains("success")){
                     return true;
                 }
@@ -365,6 +366,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 e.printStackTrace(); return false;
             } catch (IOException e) {
                 e.printStackTrace(); return false;
+            } catch (Exception e){
+                e.printStackTrace();return false;
             }
 
             for (String credential : DUMMY_CREDENTIALS) {
@@ -402,9 +405,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
 
-
     }
-
+    @Override
+    public void onBackPressed(){
+        finish();
+    }
 
 
 

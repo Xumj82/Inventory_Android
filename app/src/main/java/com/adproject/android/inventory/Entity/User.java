@@ -40,6 +40,7 @@ public class User extends HashMap<String, String>{
             }
         } catch (Exception e) {
             Log.e("User", "JSONArray error");
+            e.printStackTrace();
         }
         return(list);
     }
