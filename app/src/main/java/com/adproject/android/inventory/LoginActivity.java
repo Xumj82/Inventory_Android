@@ -361,13 +361,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return true;
                 }
             } catch (ProtocolException e) {
-                e.printStackTrace(); return false;
+                e.printStackTrace();
             } catch (MalformedURLException e) {
-                e.printStackTrace(); return false;
+                e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace(); return false;
+                e.printStackTrace();
             } catch (Exception e){
-                e.printStackTrace();return false;
+                e.printStackTrace();
             }
 
             for (String credential : DUMMY_CREDENTIALS) {
