@@ -15,9 +15,9 @@ import java.util.Map;
 
 public class Request extends HashMap<String, String> {
     static String host = "inventorywebapi2019.azurewebsites.net";
-    static String baseURL = String.format("http://%s/api/Request", host);
+    static String baseURL = String.format("http://%s/api/PendingRequest", host);
 
-    public Request(String requestid, String item, String status,String employee,String dept,String orderid,String date,String qty,String remarks,String userid) {
+    public Request(String requestid, String item, String status,String employee,String dept,String orderid,String date,String qty,String remarks,String userid,String username) {
         put("RequestID", requestid);
         put("Description", item);
         put("Status", status);
@@ -28,6 +28,7 @@ public class Request extends HashMap<String, String> {
         put("Qty",qty);
         put("Remarks",remarks);
         put("UserID",userid);
+        put("UserName",username);
     }
 
     public static List<Request> ReadAllRequest() {
@@ -39,13 +40,14 @@ public class Request extends HashMap<String, String> {
                 list.add(new Request(b.getString("RequestID"),
                         b.getJSONObject("Catalogue").getString("Description"),
                         b.getString("RequestStatus"),
-                        b.getJSONObject("AspNetUser").getString("Name"),
+                        b.getJSONObject("AspNetUsers").getString("Name"),
                         b.getJSONObject("AspNetUsers").getString("DepartmentID"),
                         b.getString("OrderID"),
                         b.getString("RequestDate"),
                         b.getString("Needed"),
                         b.getString("Remarks"),
-                        b.getString("UserID")
+                        b.getString("UserID"),
+                        b.getJSONObject("AspNetUsers").getString("UserName")
                 ));
             }
         } catch (Exception e) {
@@ -72,7 +74,8 @@ public class Request extends HashMap<String, String> {
                         b.getString("RequestDate"),
                         b.getString("Needed"),
                         b.getString("Remarks"),
-                        b.getString("UserID")
+                        b.getString("UserID"),
+                        b.getJSONObject("AspNetUsers").getString("UserName")
                         ));
             }
         } catch (Exception e) {
@@ -93,7 +96,7 @@ public class Request extends HashMap<String, String> {
     public static List<Request> ReadRequestByOrderIDUserID(String id,String userid) {
         List<Request> list = new ArrayList<Request>();
         List<Request> list1 = new ArrayList<Request>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL+"/"+id);
+        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL+"/"+id+"/"+userid);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -106,11 +109,12 @@ public class Request extends HashMap<String, String> {
                         b.getString("RequestDate"),
                         b.getString("Needed"),
                         b.getString("Remarks"),
-                        b.getString("UserID")
+                        b.getString("UserID"),
+                        b.getJSONObject("AspNetUsers").getString("UserName")
                 ));
             }
             for(Request r:list){
-                if(r.get("Status").equals("Unapproved")&&r.get("UserID").equals(userid)) {
+                if(r.get("Status").equals("Unapproved")) {
                     list1.add(r);
                 }
             }
