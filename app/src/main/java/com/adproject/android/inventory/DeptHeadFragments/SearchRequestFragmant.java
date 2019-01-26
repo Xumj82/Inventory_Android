@@ -1,4 +1,4 @@
-package com.adproject.android.inventory.Fragments;
+package com.adproject.android.inventory.DeptHeadFragments;
 
 import android.support.v4.app.Fragment;
 

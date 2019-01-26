@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DeptHeadActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -26,7 +26,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        layout="@layout/content_main"
+        layout="@layout/depthead_content"
         android:layout_width="360dp"
         android:layout_height="507dp"
         app:layout_constraintStart_toStartOf="parent"

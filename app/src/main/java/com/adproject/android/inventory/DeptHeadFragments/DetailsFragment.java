@@ -1,4 +1,4 @@
-package com.adproject.android.inventory.Fragments;
+package com.adproject.android.inventory.DeptHeadFragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,7 +37,7 @@ public class DetailsFragment extends Fragment {
     List<Request> requests;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_request_details, container, false);
+        View v = inflater.inflate(R.layout.depthead_fragment_request_details, container, false);
         getActivity().setTitle("Request Details");
         Bundle arg = getArguments();
         HashMap<String,String> request = (HashMap<String,String>) arg.getSerializable("details");

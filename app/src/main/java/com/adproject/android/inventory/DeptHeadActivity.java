@@ -1,7 +1,6 @@
 package com.adproject.android.inventory;
 
 
-import android.app.Activity;
 import  android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -19,18 +18,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.adproject.android.inventory.Connection.Logout;
-import com.adproject.android.inventory.Fragments.DeptHeadFragment;
-import com.adproject.android.inventory.Fragments.DeptRepFragment;
-import com.adproject.android.inventory.Fragments.DetailsFragment;
-import com.adproject.android.inventory.Fragments.HomeFragment;
-import com.adproject.android.inventory.Fragments.RequestFragment;
+import com.adproject.android.inventory.Connection.AccountConnection;
+import com.adproject.android.inventory.DeptHeadFragments.DeptHeadFragment;
+import com.adproject.android.inventory.DeptHeadFragments.DeptRepFragment;
+import com.adproject.android.inventory.DeptHeadFragments.DetailsFragment;
+import com.adproject.android.inventory.DeptHeadFragments.HomeFragment;
+import com.adproject.android.inventory.DeptHeadFragments.RequestFragment;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DeptHeadActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public String email;
     public String userid;
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.depthead_activity);
         setTitle("Home");
         //数据
         email = getIntent().getExtras().getString("email");
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        getMenuInflater().inflate(R.menu.depthead_setting_menu, menu);
         return true;
     }
 
@@ -157,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             depthead.setArguments(args);
             fm.beginTransaction().replace(R.id.conten_frame,depthead).addToBackStack(null).commit();
         } else if (id == R.id.nav_logout) {
-            Logout logout = new Logout();
-            logout.Logout();
+            AccountConnection accountConnection = new AccountConnection();
+            accountConnection.Logout();
             final Intent login = new Intent(this,LoginActivity.class);
             startActivity(login);
             finish();

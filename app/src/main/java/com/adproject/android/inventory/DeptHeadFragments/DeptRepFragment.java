@@ -1,4 +1,4 @@
-package com.adproject.android.inventory.Fragments;
+package com.adproject.android.inventory.DeptHeadFragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,7 +35,7 @@ public class DeptRepFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dept_rep, container, false);
+        View v = inflater.inflate(R.layout.depthead_fragment_dept_rep, container, false);
         deptid = getActivity().getIntent().getExtras().getString("dept");
         GetRep(deptid);
         ReadUser(deptid);

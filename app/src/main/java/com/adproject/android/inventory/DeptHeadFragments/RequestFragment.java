@@ -1,9 +1,7 @@
-package com.adproject.android.inventory.Fragments;
+package com.adproject.android.inventory.DeptHeadFragments;
 
-import android.content.ClipData;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Adapter.RequestAdapter;
@@ -22,7 +18,6 @@ import com.adproject.android.inventory.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class RequestFragment extends ListFragment{
     public static final String TAG = "content";
@@ -52,7 +47,7 @@ public class RequestFragment extends ListFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_request, container, false);
+        view = inflater.inflate(R.layout.depthead_fragment_request, container, false);
         deptid = getActivity().getIntent().getExtras().getString("dept");
         getActivity().setTitle("Request List");
         getRequests(deptid);

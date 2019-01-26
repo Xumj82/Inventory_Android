@@ -1,4 +1,4 @@
-package com.adproject.android.inventory.Fragments;
+package com.adproject.android.inventory.DeptHeadFragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +22,7 @@ import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.Entity.User;
 import com.adproject.android.inventory.R;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,7 +43,7 @@ public class DeptHeadFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dept_head, container, false);
+        View v = inflater.inflate(R.layout.depthead_fragment_dept_head, container, false);
         userid = (String)getArguments().getSerializable("userid");
         deptid = getActivity().getIntent().getExtras().getString("dept");
         GetEmployee(deptid);

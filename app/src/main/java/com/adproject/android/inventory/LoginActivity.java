@@ -3,6 +3,7 @@ package com.adproject.android.inventory;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.adproject.android.inventory.Connection.AccountConnection;
 import com.adproject.android.inventory.Connection.JSONParser;
 
 import java.io.DataOutputStream;
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        i = new Intent(this,MainActivity.class);
+        i = new Intent(this,DeptHeadActivity.class);
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -204,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             intent.putExtra("email",email);
-            mAuthTask = new UserLoginTask(email, password,intent);
+            mAuthTask = new UserLoginTask(email, password,intent,this);
             mAuthTask.execute((Void) null);
         }
     }
@@ -313,87 +315,77 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, String> {
 
         private final String mEmail;
         private final String mPassword;
-        private final Intent mIntent;
+        private  Intent mIntent;
         private  String mUserID;
         private  String mName;
         private  String mDept;
+        private Activity login;
         InputStream is = null;
         String url = "https://inventoryaandroid.azurewebsites.net/Account/MobileLogin";
 
-        UserLoginTask(String email, String password,Intent intent) {
+        UserLoginTask(String email, String password, Intent intent, Activity activity) {
             mEmail = email;
             mPassword = password;
             mIntent = intent;
             mUserID = "Test User";
+            login = activity;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
             try {
-                URL u = new URL(url);
-                String urlParameters  = "username="+mEmail+"&password="+mPassword;
-                byte[] postData = urlParameters.getBytes( StandardCharsets.UTF_8 );
-                int    postDataLength = postData.length;
-                HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-                conn.setRequestMethod( "POST" );
-                conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestProperty( "charset", "utf-8");
-                conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-                conn.setUseCaches( false );
-                DataOutputStream wr = new DataOutputStream( conn.getOutputStream());
-                wr.write(postData);
-                conn.connect();
-                String a = conn.getResponseMessage();
-                is = conn.getInputStream();
-                String s = JSONParser.readStream(is);
+                String s = AccountConnection.login(mEmail,mPassword);
                 String ss = s.split("\n")[0];
                 String[] sss= ss.split("/",4);
                 mUserID = sss[1];
                 mName = sss[2];
                 mDept = sss[3];
                 if(s.contains("success")){
-                    return true;
+                    return "DeptHead";
                 }
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (Exception e){
                 e.printStackTrace();
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mEmail)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
 
             // TODO: register the new account here.
-            return false;
+            return "fail";
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final String status) {
             mAuthTask = null;
             showProgress(false);
-            if (success) {
+            if (status.equals("DeptHead")) {
                 finish();
                 mIntent.putExtra("userid",mUserID);
                 mIntent.putExtra("email",mEmail);
                 mIntent.putExtra("name",mName);
                 mIntent.putExtra("dept",mDept);
                 startActivity(mIntent);
-            } else {
+            }else if(status.equals("StoreClerk")) {
+                finish();
+                mIntent.setClass(login,StoreClerkActivity.class);
+                mIntent.putExtra("userid",mUserID);
+                mIntent.putExtra("email",mEmail);
+                mIntent.putExtra("name",mName);
+                mIntent.putExtra("dept",mDept);
+                startActivity(mIntent);
+
+            }else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
