@@ -347,7 +347,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mName = sss[2];
                 mDept = sss[3];
                 if(s.contains("success")){
-                    return "DeptHead";
+                    //return "DeptHead";
+                    return "StoreClerk";
                 }
             } catch (Exception e){
                 e.printStackTrace();

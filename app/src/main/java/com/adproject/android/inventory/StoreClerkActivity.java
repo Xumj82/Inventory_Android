@@ -3,6 +3,9 @@ package com.adproject.android.inventory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,17 +15,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.adproject.android.inventory.StoreClerkFragment.HomeFragment;
+import com.adproject.android.inventory.StoreClerkFragment.ManageInventoryFragment;
 
 public class StoreClerkActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Fragment inventory;
+    Fragment home;
+    FragmentManager fm;
+    FragmentTransaction ft;
+    public String email;
+    public String userid;
+    public String username;
+    public String userdept;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storeclerk_activity);
+        email = getIntent().getExtras().getString("email");
+        userid = getIntent().getExtras().getString("userid");
+        username = getIntent().getExtras().getString("name");
+        userdept = getIntent().getExtras().getString("dept");
+        //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //hide
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,15 +53,29 @@ public class StoreClerkActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        //Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //Header
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//        View headerView = navigationView.getHeaderView(0);
+//        TextView navEmail = (TextView) headerView.findViewById(R.id.textHeadEmail);
+//        TextView navName = headerView.findViewById(R.id.textHeadName);
+//        navName.setText("Hello,"+username);
+//        navEmail.setText(email);
+
+
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        inventory = new ManageInventoryFragment();
+        home = HomeFragment.newInstance("Home");
+        ft.add(R.id.conten_frame_storeclerk,home);
+        ft.commit();
     }
 
     @Override
