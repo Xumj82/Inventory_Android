@@ -2,7 +2,7 @@ package com.adproject.android.inventory.Entity;
 
 import android.util.Log;
 
-import com.adproject.android.inventory.Connection.JSONParser;
+import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ public class User extends HashMap<String, String>{
 
     public static List<User> ReadUser(String id) {
         List<User> list = new ArrayList<User>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL+id);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+id);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);

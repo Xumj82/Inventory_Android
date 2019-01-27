@@ -32,16 +32,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Connection.AccountConnection;
-import com.adproject.android.inventory.Connection.JSONParser;
+import com.adproject.android.inventory.Connection.HttpConnection;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -340,14 +333,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                String s = AccountConnection.login(mEmail,mPassword);
+                String s = HttpConnection.login(mEmail,mPassword);
                 String ss = s.split("\n")[0];
                 String[] sss= ss.split("/",4);
                 mUserID = sss[1];
                 mName = sss[2];
                 mDept = sss[3];
-                if(s.contains("success")){
+                if(s.contains("DeptHead")){
                     return "DeptHead";
+                }
+                else if(s.contains("StoreClerk")){
+                    return "StoreClerk";
                 }
             } catch (Exception e){
                 e.printStackTrace();

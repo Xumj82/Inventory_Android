@@ -43,7 +43,7 @@
         android:id="@+id/buttonSetStartTime"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:background="@android:drawable/ic_menu_today"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +53,8 @@
         android:id="@+id/buttonSetEndTime"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="88dp"
         android:background="@android:drawable/ic_menu_today"
         app:layout_constraintBottom_toTopOf="@+id/buttonDeptHeadSave"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -71,9 +71,10 @@
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/editEnd"
         app:layout_constraintEnd_toStartOf="@+id/buttonSetStartTime"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDeptHeadSelect" />
+        app:layout_constraintTop_toBottomOf="@+id/textDeptHeadSelect"
+        app:layout_constraintVertical_bias="0.35" />
 
     <EditText
         android:id="@+id/editEnd"
@@ -81,11 +82,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="21dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="92dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/buttonDeptHeadSave"
         app:layout_constraintEnd_toStartOf="@+id/buttonSetEndTime"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -104,7 +106,8 @@
         android:layout_width="158dp"
         android:layout_height="32dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="13dp"
+        android:text="None"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

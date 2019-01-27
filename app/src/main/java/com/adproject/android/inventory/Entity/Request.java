@@ -2,7 +2,7 @@ package com.adproject.android.inventory.Entity;
 
 import android.util.Log;
 
-import com.adproject.android.inventory.Connection.JSONParser;
+import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,8 +10,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 public class Request extends HashMap<String, String> {
     static String host = "inventorywebapi2019.azurewebsites.net";
@@ -33,7 +31,7 @@ public class Request extends HashMap<String, String> {
 
     public static List<Request> ReadAllRequest() {
         List<Request> list = new ArrayList<Request>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -61,7 +59,7 @@ public class Request extends HashMap<String, String> {
     public static List<Request> ReadOrderByDept(String id) {
         List<Request> list = new ArrayList<Request>();
         List<Request> list1 = new ArrayList<Request>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -96,7 +94,7 @@ public class Request extends HashMap<String, String> {
     public static List<Request> ReadRequestByOrderIDUserID(String id,String userid) {
         List<Request> list = new ArrayList<Request>();
         List<Request> list1 = new ArrayList<Request>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL+"/"+id+"/"+userid);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"/"+id+"/"+userid);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);

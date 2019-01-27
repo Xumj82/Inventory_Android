@@ -1,26 +1,26 @@
 [
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_template_custom_big.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_template_custom_big.xml"
     },
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_template_part_chronometer.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_template_icon_group.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_template_icon_group.xml"
     },
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_action.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_action.xml"
     },
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_action_tombstone.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_action_tombstone.xml"
     },
     {
         "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\1f3dc26949d5b4a0be581770ecc73ac7\\res\\layout\\notification_template_part_time.xml"
+        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\layout\\notification_template_part_time.xml"
     }
 ]

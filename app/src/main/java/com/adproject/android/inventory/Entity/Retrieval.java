@@ -1,6 +1,6 @@
 package com.adproject.android.inventory.Entity;
 
-import com.adproject.android.inventory.Connection.JSONParser;
+import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +13,7 @@ public class Retrieval extends HashMap<String,String> {
 
     public Retrieval(String requestId,String itemDescription,String neededQuantity,String availableQuantity,String binNumber,String remarks,String orderid){
         put("requestId",requestId);
+        put("neededQuantity",neededQuantity);
         put("itemDescription",itemDescription);
         put("availableQuantity",availableQuantity);
         put("binNumber",binNumber);
@@ -20,11 +21,11 @@ public class Retrieval extends HashMap<String,String> {
         put("orderid",orderid);
     }
 
-    static List<Retrieval> GetRetrievals(){
+    public static List<Retrieval> GetRetrievals(){
         List<Retrieval> requests = new ArrayList<>();
         try {
-            JSONArray a = new JSONArray();
-            a = JSONParser.getJSONFromUrl("https://inventory123.azurewebsites.net/StoreClerk/GetRetrievals").getJSONArray("data");
+            JSONArray a;
+            a = HttpConnection.getJSONFromUrl("https://inventory123.azurewebsites.net/StoreClerk/GetRetrievals").getJSONArray("data");
             for(int i =0;i<a.length();i++){
                 requests.add(new Retrieval(
                         a.getJSONObject(i).getString("requestId"),

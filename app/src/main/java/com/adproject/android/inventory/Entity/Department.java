@@ -1,9 +1,8 @@
 package com.adproject.android.inventory.Entity;
 
-import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
-import com.adproject.android.inventory.Connection.JSONParser;
+import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,7 +29,7 @@ public class Department extends HashMap<String,String> {
 
     public static List<Department> ReadDepts() {
         List<Department> list = new ArrayList<>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -52,7 +51,7 @@ public class Department extends HashMap<String,String> {
 
     public static List<User> ReadUserByDeptID(String id) {
         List<User> list = new ArrayList<>();
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);

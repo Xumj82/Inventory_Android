@@ -42,6 +42,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:text="None"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="27dp"
         android:text="Email"
@@ -57,7 +59,8 @@
         app:layout_constraintBottom_toTopOf="@+id/textDeptRepEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDeprRepPhone" />
 
     <TextView
         android:id="@+id/textDeptRepEmail"
@@ -65,7 +68,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="32dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveRep"
         app:layout_constraintEnd_toEndOf="parent"
