@@ -22,6 +22,10 @@ import com.adproject.android.inventory.StoreClerkFragment.DispersementFragment;
 import com.adproject.android.inventory.StoreClerkFragment.HomeFragment;
 import com.adproject.android.inventory.StoreClerkFragment.ManageInventoryFragment;
 import com.adproject.android.inventory.StoreClerkFragment.RetrievalFragment;
+import android.widget.TextView;
+
+import com.adproject.android.inventory.StoreClerkFragment.HomeFragment;
+import com.adproject.android.inventory.StoreClerkFragment.ManageInventoryFragment;
 
 public class StoreClerkActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,7 +90,7 @@ public class StoreClerkActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
