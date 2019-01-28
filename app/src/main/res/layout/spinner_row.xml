@@ -5,9 +5,10 @@
 
     <TextView
         android:id="@+id/textDeptRepRow"
-        android:layout_width="wrap_content"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textAlignment="center"
+        android:textSize="14sp" />
 </LinearLayout>

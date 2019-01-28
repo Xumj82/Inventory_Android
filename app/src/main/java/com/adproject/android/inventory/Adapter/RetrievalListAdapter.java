@@ -41,10 +41,16 @@ public class RetrievalListAdapter extends BaseAdapter {
         convertView=_LayoutInflater.inflate(R.layout.storeclerk_retrieval_listrow, null);
         if(convertView!=null)
         {
-            TextView _TextView1=(TextView)convertView.findViewById(R.id.textView11);
+            TextView _TextView1=(TextView)convertView.findViewById(R.id.textView19);
             _TextView1.setText(retrievals.get(position).get("requestId"));
-            TextView _TextView2=(TextView)convertView.findViewById(R.id.textView12);
+            TextView _TextView2=(TextView)convertView.findViewById(R.id.textItemName);
             _TextView2.setText(retrievals.get(position).get("itemDescription"));
+            TextView _TextView3=(TextView)convertView.findViewById(R.id.textRequestedQuantity);
+            _TextView3.setText(retrievals.get(position).get("neededQuantity"));
+            TextView _TextView4=(TextView)convertView.findViewById(R.id.textAvailableQuantity);
+            _TextView4.setText(retrievals.get(position).get("availableQuantity"));
+            TextView _TextView5=(TextView)convertView.findViewById(R.id.textBin);
+            _TextView5.setText(retrievals.get(position).get("binNumber"));
         }
         return convertView;
     }

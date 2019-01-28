@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adproject.android.inventory.Adapter.RequestItemAdapter;
+import com.adproject.android.inventory.Connection.HttpConnection;
 import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
 
@@ -109,46 +110,16 @@ public class DetailsFragment extends Fragment {
                     J1.put("reason",remarks);
                     body.add(J1);
                 }
-                URL Url = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
-                conn.setConnectTimeout(5000);
-                // 设置允许输出
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setRequestMethod("POST");
-                // 设置contentType
-                conn.setRequestProperty("Content-Type", "application/json");
-                DataOutputStream os = new DataOutputStream( conn.getOutputStream());
-                String content = String.valueOf(body);
-                os.writeBytes(content);
-                os.flush();
-                os.close();
-                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    InputStreamReader in = new InputStreamReader(conn.getInputStream());
-                    BufferedReader bf = new BufferedReader(in);
-                    String recieveData = null;
-                    String result = "";
-                    while ((recieveData = bf.readLine()) != null){
-                        result += recieveData + "\n";
-                    }
-                    in.close();
-                    conn.disconnect();
-                    return true;
-                }
-                return false;
-            } catch (JSONException e) {
+                return HttpConnection.postJSONObject(url,body);
+              } catch (JSONException e) {
                 e.printStackTrace();return false;
-            } catch (IOException io){
-                io.printStackTrace();return false;
-            }
-
+              }
             }
             @Override
             protected void onPostExecute(Boolean aBoolean) {
                 //super.onPostExecute(aBoolean);
                 try {
                     if (aBoolean == true) {
-
                     }
                     Toast.makeText(getActivity().getApplicationContext(), aBoolean.toString(),
                             Toast.LENGTH_SHORT).show();

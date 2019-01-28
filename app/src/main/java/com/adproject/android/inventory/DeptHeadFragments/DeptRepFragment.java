@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adproject.android.inventory.Adapter.UseraAdpter;
+import com.adproject.android.inventory.Adapter.UserAdapter;
 import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.Entity.User;
 import com.adproject.android.inventory.R;
@@ -65,7 +65,7 @@ public class DeptRepFragment extends Fragment {
                 }
 
             });
-        };
+        }
         Button save = getActivity().findViewById(R.id.buttonSaveRep);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +125,7 @@ public class DeptRepFragment extends Fragment {
             @Override
             protected void onPostExecute(List<User> users) {
                 try {
-                    UseraAdpter adapter = new UseraAdpter(getActivity(), users);
+                    UserAdapter adapter = new UserAdapter(getActivity(), users);
                     spinner.setAdapter(adapter);
                 }catch (Exception e){
                     e.printStackTrace();

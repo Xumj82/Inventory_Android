@@ -47,7 +47,6 @@ public class InventoryAdapter extends BaseAdapter implements Filterable {
                 TextView _TextView1=(TextView)convertView.findViewById(R.id.inventoryrow2);
                 _TextView1.setText(catalogues.get(position).get("Description"));
                 TextView _TextView2=(TextView)convertView.findViewById(R.id.inventoryrow1);
-
                 _TextView2.setText(catalogues.get(position).get("ItemID"));
             }
             return convertView;

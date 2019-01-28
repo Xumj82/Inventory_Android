@@ -29,53 +29,6 @@ import java.util.Map;
 
 public class HttpConnection {
 
-
-    static final String COOKIES_HEADER = "Set-Cookie";
-    static java.net.CookieManager msCookieManager = new java.net.CookieManager();
-
-    static public String login(String username,String password){
-
-        String s = "";
-        try {
-            String url = "https://inventory123.azurewebsites.net/Account/MobileLogin";
-            InputStream is = null;
-            URL u = new URL(url);
-            String urlParameters = "username=" + username + "&password=" + password;
-            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-            int postDataLength = postData.length;
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("charset", "utf-8");
-            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
-            conn.setUseCaches(false);
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.write(postData);
-            conn.connect();
-
-            //set-cookie
-            Map<String, List<String>> headerFields = conn.getHeaderFields();
-            List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-            if (cookiesHeader != null) {
-                for (String cookie : cookiesHeader) {
-                    msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
-                }
-            }
-
-            String a = conn.getResponseMessage();
-            is = conn.getInputStream();
-            s = HttpConnection.readStream(is);
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return s;
-    }
-
-
     public static String getStream(String url) {
         InputStream is = null;
         StringBuilder sb = new StringBuilder();
@@ -85,10 +38,10 @@ public class HttpConnection {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
             //set cookie for authentication
-            if (msCookieManager.getCookieStore().getCookies().size() > 0) {
+            if (AccountConnection.msCookieManager.getCookieStore().getCookies().size() > 0) {
                 // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
                 conn.setRequestProperty("Cookie",
-                        TextUtils.join(";",  msCookieManager.getCookieStore().getCookies()));
+                        TextUtils.join(";",  AccountConnection.msCookieManager.getCookieStore().getCookies()));
             }
 
             conn.setRequestMethod("GET");
@@ -96,10 +49,10 @@ public class HttpConnection {
             conn.connect();
 
             Map<String, List<String>> headerFields = conn.getHeaderFields();
-            List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+            List<String> cookiesHeader = headerFields.get(AccountConnection.COOKIES_HEADER);
             if (cookiesHeader != null) {
                 for (String cookie : cookiesHeader) {
-                    msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
+                    AccountConnection.msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
                 }
             }
 
@@ -169,6 +122,36 @@ public class HttpConnection {
         }
         return  readStream(is);
 
+    }
+
+    public static Boolean postJSONObject(String url,List<JSONObject> jsonObject){
+        try {
+            URL Url = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+            conn.setConnectTimeout(5000);
+            // 设置允许输出
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod("POST");
+            // 设置contentType
+            conn.setRequestProperty("Content-Type", "application/json");
+            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+            String content = String.valueOf(jsonObject);
+            os.writeBytes(content);
+            os.flush();
+            os.close();
+            if(conn.getResponseMessage().equals("OK")){
+                return true;
+            }
+            conn.disconnect();
+        } catch (ProtocolException e) {
+            e.printStackTrace();return false;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();return false;
+        } catch (IOException e) {
+            e.printStackTrace();return false;
+        }
+        return false;
     }
 
     public static JSONObject getJSONFromUrl(String url) {

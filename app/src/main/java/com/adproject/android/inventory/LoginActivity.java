@@ -333,7 +333,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                String s = HttpConnection.login(mEmail,mPassword);
+                String s = AccountConnection.login(mEmail,mPassword);
                 String ss = s.split("\n")[0];
                 String[] sss= ss.split("/",4);
                 mUserID = sss[1];

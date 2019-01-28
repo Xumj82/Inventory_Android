@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RetrievalDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="324dp"
+        android:layout_height="467dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request ID"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textRequestID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Requested Quantity"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textRequestedQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Available Quantity"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textAvailableQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bin#"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textBin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantity Picked"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editQuantityPicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remarks"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/buttonUpdateInventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

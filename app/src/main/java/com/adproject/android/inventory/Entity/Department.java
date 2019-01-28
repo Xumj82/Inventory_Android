@@ -5,6 +5,7 @@ import android.util.Log;
 import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -74,7 +75,29 @@ public class Department extends HashMap<String,String> {
             Log.e("User", "JSONArray error");
             e.printStackTrace();
         }
-
         return(list);
+    }
+
+    public static List<Department> GetDisbursementList(){
+        List<Department> departments = new ArrayList<>();
+        JSONArray a = HttpConnection.getJSONArrayFromUrl("https://inventory123.azurewebsites.net/StoreClerk/GetDisbursementList");
+        try{
+            for(int i=0;i<a.length();i++){
+                JSONObject b = a.getJSONObject(i);
+                departments.add(new Department("",
+                        b.getString("representative"),
+                        "",
+                        b.getString("departmentName"),
+                        b.getString("collectionPoint"),
+                        "",
+                        ""
+
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return departments;
+
     }
 }

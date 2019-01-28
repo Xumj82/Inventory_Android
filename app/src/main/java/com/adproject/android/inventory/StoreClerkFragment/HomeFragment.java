@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.adproject.android.inventory.DeptHeadFragments.DeptHeadFragment;
-import com.adproject.android.inventory.DeptHeadFragments.DeptRepFragment;
-import com.adproject.android.inventory.DeptHeadFragments.RequestFragment;
+
 import com.adproject.android.inventory.R;
 
 public class HomeFragment extends Fragment {
@@ -57,7 +55,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ManageInventoryFragment inventoryList = ManageInventoryFragment.newInstance("Inventory");
-                fm.beginTransaction().replace(R.id.conten_frame_storeclerk, inventoryList,"Inventory").addToBackStack("Inventory").commit();
+                fm.beginTransaction().replace(R.id.storeclerk_content_frame, inventoryList,"Inventory").addToBackStack("Inventory").commit();
                 NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
                 navigationView.getMenu().getItem(1).setChecked(true);
             }
