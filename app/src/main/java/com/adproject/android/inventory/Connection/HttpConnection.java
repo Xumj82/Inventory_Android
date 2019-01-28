@@ -128,6 +128,13 @@ public class HttpConnection {
         try {
             URL Url = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+            //set_cookie
+            if (AccountConnection.msCookieManager.getCookieStore().getCookies().size() > 0) {
+                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                conn.setRequestProperty("Cookie",
+                        TextUtils.join(";",  AccountConnection.msCookieManager.getCookieStore().getCookies()));
+            }
+
             conn.setConnectTimeout(5000);
             // 设置允许输出
             conn.setDoOutput(true);
