@@ -71,6 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textRepresentative" />
 
     <ListView
+        android:id="@+id/listDispersement"
         android:layout_width="331dp"
         android:layout_height="298dp"
         android:layout_marginStart="16dp"

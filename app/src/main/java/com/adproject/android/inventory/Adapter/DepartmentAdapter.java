@@ -12,11 +12,11 @@ import com.adproject.android.inventory.R;
 
 import java.util.List;
 
-public class DepartmentAdpter extends BaseAdapter {
+public class DepartmentAdapter extends BaseAdapter {
     Activity activity;
     List<Department> departments;
 
-    public  DepartmentAdpter(Activity activity,List<Department> departments){
+    public DepartmentAdapter(Activity activity, List<Department> departments){
         this.activity = activity;
         this.departments = departments;
     }

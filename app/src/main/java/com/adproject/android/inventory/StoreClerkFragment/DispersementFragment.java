@@ -1,6 +1,6 @@
 package com.adproject.android.inventory.StoreClerkFragment;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,18 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.adproject.android.inventory.Adapter.DepartmentAdpter;
+import com.adproject.android.inventory.Adapter.CatalogueAdapter;
+import com.adproject.android.inventory.Adapter.DepartmentAdapter;
+import com.adproject.android.inventory.Entity.Catalogue;
 import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.R;
+import com.adproject.android.inventory.StoreClerkActivities.SignatureActivity;
 
 import java.util.List;
 
 public class DispersementFragment extends Fragment {
     private View view;
     private Spinner spinner;
+    private List<Catalogue> catalogueList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +43,8 @@ public class DispersementFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Dispersement List");
         spinner = getActivity().findViewById(R.id.spinnerDepartmentName);
+        Button btnSign = getActivity().findViewById(R.id.buttonSign);
+        final Intent signature = new Intent(getActivity(),SignatureActivity.class);
         if(spinner!=null) {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -44,6 +54,7 @@ public class DispersementFragment extends Fragment {
                     Department department = (Department) parent.getItemAtPosition(position);
                     textRep.setText(department.get("DepartmentRep"));
                     textCP.setText(department.get("CollectionPoint"));
+                    GetDisbursements(department);
                 }
 
                 @Override
@@ -51,6 +62,26 @@ public class DispersementFragment extends Fragment {
 
                 }
             });
+            btnSign.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(catalogueList!=null) {
+                            Bundle bundle = new Bundle();
+                            int i = 1;
+                            for (Catalogue c : catalogueList) {
+                                bundle.putSerializable("C" + i, c);
+                                i++;
+                            }
+                            signature.putExtra("Catalogues", bundle);
+                            signature.putExtra("CataloguesSize", catalogueList.size());
+                            startActivity(signature);
+                        }else {
+                            Toast.makeText(getActivity().getApplicationContext(), "wait...",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            });
+
         }
     }
 
@@ -65,7 +96,7 @@ public class DispersementFragment extends Fragment {
             @Override
             protected void onPostExecute(List<Department> departments) {
                 try {
-                    DepartmentAdpter adpter = new DepartmentAdpter(getActivity(), departments);
+                    DepartmentAdapter adpter = new DepartmentAdapter(getActivity(), departments);
                     spinner = getActivity().findViewById(R.id.spinnerDepartmentName);
                     spinner.setAdapter(adpter);
 
@@ -76,24 +107,26 @@ public class DispersementFragment extends Fragment {
         }.execute();
     }
 
-    void GetDisbursements(){
-        new AsyncTask<Void,Void,List<Department>>(){
+    void GetDisbursements(Department department){
+        new AsyncTask<Department,Void,List<Catalogue>>(){
 
             @Override
-            protected List<Department> doInBackground(Void... voids) {
-                return Department.GetDisbursementList();
+            protected List<Catalogue> doInBackground(Department... departments) {
+                return Catalogue.GetDisbursementsByDept(departments[0]);
             }
 
             @Override
-            protected void onPostExecute(List<Department> departments) {
+            protected void onPostExecute(List<Catalogue> catalogues) {
                 try {
-
-
+                    catalogueList = catalogues;
+                    CatalogueAdapter adapter = new CatalogueAdapter(getActivity(),catalogues);
+                    ListView listView = getActivity().findViewById(R.id.listDispersement);
+                    listView.setAdapter(adapter);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
-        }.execute();
+        }.execute(department);
 
     }
 

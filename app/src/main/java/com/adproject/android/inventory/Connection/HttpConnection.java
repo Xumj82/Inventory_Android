@@ -79,22 +79,7 @@ public class HttpConnection {
         return  sb.toString();
     }
 
-    public static String readStream(InputStream is) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append('\n');
-            }
-            is.close();
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-        }
-        return sb.toString();
-    }
+
 
     public static String postStream(String url, Bitmap data) {
         InputStream is = null;
@@ -161,6 +146,76 @@ public class HttpConnection {
         return false;
     }
 
+    public static String postJSONArray(String url,JSONArray jsonArray){
+        InputStream is;
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL Url = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+            //set_cookie
+            if (AccountConnection.msCookieManager.getCookieStore().getCookies().size() > 0) {
+                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                conn.setRequestProperty("Cookie",
+                        TextUtils.join(";",  AccountConnection.msCookieManager.getCookieStore().getCookies()));
+            }
+
+            conn.setConnectTimeout(5000);
+            // 设置允许输出
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod("POST");
+            // 设置contentType
+            conn.setRequestProperty("Content-Type", "application/json");
+            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+            String content = String.valueOf(jsonArray);
+            os.writeBytes(content);
+            os.flush();
+            os.close();
+            is = conn.getInputStream();
+            //this message is for test
+            String message = conn.getResponseMessage();
+        } catch (ProtocolException e) {
+            e.printStackTrace();return null;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();return null;
+        } catch (IOException e) {
+            e.printStackTrace();return null;
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    is, "iso-8859-1"), 8);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append('\n');
+            }
+            is.close();
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
+        return  sb.toString();
+    }
+
+
+
+
+    public static String readStream(InputStream is) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    is, "iso-8859-1"), 8);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append('\n');
+            }
+            is.close();
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
+        return sb.toString();
+    }
+
     public static JSONObject getJSONFromUrl(String url) {
         JSONObject jObj = null;
         try {
@@ -177,7 +232,18 @@ public class HttpConnection {
             jArray = new JSONArray(getStream(url));
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing array " + e.toString());
+            e.printStackTrace();
         }
         return jArray;
+    }
+
+    public static JSONArray getJSONArrayByJSONArray(String url,JSONArray jsonArray){
+       JSONArray jArray = null;
+       try{
+           jArray = new JSONArray(postJSONArray(url,jsonArray));
+       } catch (JSONException e) {
+           e.printStackTrace();
+       }
+       return jArray;
     }
 }

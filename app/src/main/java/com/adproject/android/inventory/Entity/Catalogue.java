@@ -5,13 +5,15 @@ import android.util.Log;
 import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Catalogue extends HashMap<String, String> {
+public class Catalogue extends HashMap<String, String> implements Serializable {
     static String host = "inventorywebapi2019.azurewebsites.net";
     static String baseURL = String.format("http://%s/api/Catalogue", host);
 
@@ -44,6 +46,34 @@ public class Catalogue extends HashMap<String, String> {
             Log.e("User", "JSONArray error");
         }
         return (list);
+    }
+
+    public static List<Catalogue> GetDisbursementsByDept(Department department){
+        JSONObject jsonObject= new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        List<Catalogue> catalogues = new ArrayList<>();
+        String url = "https://inventory123.azurewebsites.net/StoreClerk/GetDisbursementItems";
+        try {
+            jsonObject.put("deptName", department.get("DepartmentName"));
+            jsonArray.put(jsonObject);
+            jsonArray = HttpConnection.getJSONArrayByJSONArray(url,jsonArray);
+            for(int i = 0; i < jsonArray.length(); i++){
+                jsonObject = jsonArray.getJSONObject(i);
+                catalogues.add(new Catalogue(
+                        "",
+                        jsonObject.getString("itemDescription"),
+                        jsonObject.getString("quantity"),
+                        "",
+                        jsonObject.getString("uom"),
+                        "",
+                        ""
+
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return catalogues;
     }
 
 }

@@ -1,7 +1,6 @@
-package com.adproject.android.inventory;
+package com.adproject.android.inventory.StoreClerkActivities;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adproject.android.inventory.Adapter.DepartmentAdpter;
-import com.adproject.android.inventory.Connection.HttpConnection;
-import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.Entity.Retrieval;
-
-import java.util.List;
+import com.adproject.android.inventory.R;
 
 public class RetrievalDetailsActivity extends AppCompatActivity {
 
+    Activity activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +45,20 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pickQty = Integer.parseInt(editText1.getText().toString());
-                String remarks = editText2.getText().toString();
-                int availableQty  =Integer.parseInt(textView4.getText().toString());
-                if(pickQty<0){
-                    editText1.setError("cannot less than 0");
-                }else if(pickQty>availableQty){
-                    editText1.setError("cannot more than available quantity");
+                if(!editText1.getText().toString().equals("")) {
+                    int pickQty = Integer.parseInt(editText1.getText().toString());
+                    String remarks = editText2.getText().toString();
+                    int availableQty = Integer.parseInt(textView4.getText().toString());
+                    if (pickQty < 0) {
+                        editText1.setError("cannot less than 0");
+                    } else if (pickQty > availableQty) {
+                        editText1.setError("cannot more than available quantity");
+                    } else {
+                        UpdateInventory();
+                        onBackPressed();
+                    }
                 }else {
-                    UpdateInventory();
+                    editText1.setError("Please enter pick up number");
                 }
             }
         });
@@ -66,8 +67,6 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
     }
 
     void UpdateInventory(){
-
-
         Toast.makeText(this.getApplicationContext(), "Update",
                 Toast.LENGTH_SHORT).show();
     }
