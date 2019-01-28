@@ -1,17 +1,26 @@
 package com.adproject.android.inventory.StoreClerkFragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.adproject.android.inventory.Adapter.InventoryAdapter;
+import com.adproject.android.inventory.Adapter.RequestAdapter;
+import com.adproject.android.inventory.DeptHeadFragments.RequestFragment;
+import com.adproject.android.inventory.EditCatalogueActivity;
 import com.adproject.android.inventory.Entity.Catalogue;
+import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
+import com.adproject.android.inventory.StoreClerkActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +42,20 @@ public class ManageInventoryFragment extends ListFragment {
         getActivity().setTitle("Inventory List");
         getCatalogue();
         return(v);
+    }
+
+
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Catalogue selected = (Catalogue) getListAdapter().getItem(position);
+        Intent intent = new Intent(this.getActivity(), EditCatalogueActivity.class);
+        intent.putExtra("ItemID", selected.get("ItemID"));
+        intent.putExtra("Description", selected.get("Description"));
+        intent.putExtra("Quantity", selected.get("Quantity"));
+        intent.putExtra("Category", selected.get("Category"));
+        intent.putExtra("MeasureUnit", selected.get("MeasureUnit"));
+        intent.putExtra("Price", selected.get("Price"));
+        intent.putExtra("BinNumber", selected.get("BinNumber"));
+        startActivity(intent);
     }
 
     private  void  getCatalogue(){

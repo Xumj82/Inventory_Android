@@ -1,22 +1,22 @@
 [
     {
-        "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_normal.9.png",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\drawable-hdpi-v4\\notification_bg_normal.9.png"
+        "merged": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_low_normal.9.png",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\drawable-hdpi-v4\\notification_bg_low_normal.9.png"
     },
     {
-        "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_low_normal.9.png",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\drawable-hdpi-v4\\notification_bg_low_normal.9.png"
+        "merged": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png"
+        "merged": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
-        "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png"
+        "merged": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_normal.9.png",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\drawable-hdpi-v4\\notification_bg_normal.9.png"
     },
     {
-        "merged": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png",
-        "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png"
+        "merged": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png"
     }
 ]

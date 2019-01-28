@@ -27,10 +27,12 @@
         <activity
             android:name=".DeptHeadActivity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".StoreClerkActivity"
             android:label="@string/title_activity_store_clerk"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditCatalogueActivity"></activity>
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".StoreClerkActivities.RetrievalDetailsActivity" />
         <activity android:name=".StoreClerkActivities.SignatureActivity"></activity>

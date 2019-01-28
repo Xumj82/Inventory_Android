@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class AccountConnection {
 
-    static final String COOKIES_HEADER = "Set-Cookie";
-    static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+    public static final String COOKIES_HEADER = "Set-Cookie";
+    public static java.net.CookieManager msCookieManager = new java.net.CookieManager();
 
     static public String login(String username,String password){
         String s = "";
