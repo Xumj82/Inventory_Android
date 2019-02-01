@@ -1,4 +1,4 @@
-package com.adproject.android.inventory;
+package com.adproject.android.inventory.StoreClerkActivities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,13 +13,15 @@ import android.widget.TextView;
 
 
 import com.adproject.android.inventory.Entity.Catalogue;
+import com.adproject.android.inventory.R;
 
 public class EditCatalogueActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_catalogue);
+        setContentView(R.layout.storeclerk_edit_catalogue);
+        setTitle("Edit");
         Intent intent = getIntent();
         final TextView txt1 = findViewById(R.id.txtItemID);
         final TextView txt2 = findViewById(R.id.txtDescription);

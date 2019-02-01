@@ -1,46 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+            "outputFile": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\9838bbeb6e1b566e1cd3ad367a3f40cf\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\42f7783c691dfed16c6cd450f9d79026\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "40",
-                        "endOffsets": "91"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,112,155",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "107,150,191"
                     },
                     "to": {
-                        "startLines": "48",
-                        "startColumns": "4",
-                        "startOffsets": "2962",
-                        "endColumns": "40",
-                        "endOffsets": "2998"
+                        "startLines": "51,52,55",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3073,3130,3242",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "3125,3168,3278"
                     }
                 },
                 {
-                    "source": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\src\\main\\res\\values\\attrs.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "8",
-                        "endColumns": "24",
-                        "endOffsets": "404"
-                    },
-                    "to": {
-                        "startLines": "19",
-                        "startColumns": "4",
-                        "startOffsets": "1153",
-                        "endLines": "25",
-                        "endColumns": "24",
-                        "endOffsets": "1490"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,53,54,58,59,60",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -59,65 +40,65 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\81b9db4b4038e74beb0f829d8848fb3d\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\src\\main\\res\\values\\attrs.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,112,155",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "107,150,191"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "8",
+                        "endColumns": "24",
+                        "endOffsets": "404"
                     },
                     "to": {
-                        "startLines": "51,52,55",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3073,3130,3242",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "3125,3168,3278"
+                        "startLines": "19",
+                        "startColumns": "4",
+                        "startOffsets": "1153",
+                        "endLines": "25",
+                        "endColumns": "24",
+                        "endOffsets": "1490"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\0c1049e2fd352cefc75818c753b607b9\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "40",
+                        "endOffsets": "91"
+                    },
+                    "to": {
+                        "startLines": "48",
+                        "startColumns": "4",
+                        "startOffsets": "2962",
+                        "endColumns": "40",
+                        "endOffsets": "2998"
                     }
                 }
             ]
         },
         {
-            "outputFile": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\9838bbeb6e1b566e1cd3ad367a3f40cf\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\42f7783c691dfed16c6cd450f9d79026\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "40",
-                        "endOffsets": "91"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,112,155",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "107,150,191"
                     },
                     "to": {
-                        "startLines": "48",
-                        "startColumns": "4",
-                        "startOffsets": "2962",
-                        "endColumns": "40",
-                        "endOffsets": "2998"
+                        "startLines": "51,52,55",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3073,3130,3242",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "3125,3168,3278"
                     }
                 },
                 {
-                    "source": "C:\\Users\\User\\Desktop\\Code\\DeptHead\\signature-pad\\src\\main\\res\\values\\attrs.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "8",
-                        "endColumns": "24",
-                        "endOffsets": "404"
-                    },
-                    "to": {
-                        "startLines": "19",
-                        "startColumns": "4",
-                        "startOffsets": "1153",
-                        "endLines": "25",
-                        "endColumns": "24",
-                        "endOffsets": "1490"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8c17a853f95e7f2a9c4c9ea88bb3a962\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\aba8b2eabba95db269fb6c38aabe0d0a\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,53,54,58,59,60",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -136,20 +117,39 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\User\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\81b9db4b4038e74beb0f829d8848fb3d\\res\\values\\values.xml",
+                    "source": "C:\\Users\\11351\\AndroidStudioProjects\\Inventory\\signature-pad\\src\\main\\res\\values\\attrs.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,112,155",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "107,150,191"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "8",
+                        "endColumns": "24",
+                        "endOffsets": "404"
                     },
                     "to": {
-                        "startLines": "51,52,55",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3073,3130,3242",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "3125,3168,3278"
+                        "startLines": "19",
+                        "startColumns": "4",
+                        "startOffsets": "1153",
+                        "endLines": "25",
+                        "endColumns": "24",
+                        "endOffsets": "1490"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\11351\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\0c1049e2fd352cefc75818c753b607b9\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "40",
+                        "endOffsets": "91"
+                    },
+                    "to": {
+                        "startLines": "48",
+                        "startColumns": "4",
+                        "startOffsets": "2962",
+                        "endColumns": "40",
+                        "endOffsets": "2998"
                     }
                 }
             ]

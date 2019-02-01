@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Entity.Catalogue;
-import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
 
 import java.util.List;
@@ -48,6 +47,17 @@ public class InventoryAdapter extends BaseAdapter implements Filterable {
                 _TextView1.setText(catalogues.get(position).get("Description"));
                 TextView _TextView2=(TextView)convertView.findViewById(R.id.inventoryrow1);
                 _TextView2.setText(catalogues.get(position).get("ItemID"));
+                TextView _TextView3=(TextView)convertView.findViewById(R.id.inventoryrow3);
+                _TextView3.setText(catalogues.get(position).get("Quantity"));
+                TextView _TextView4=(TextView)convertView.findViewById(R.id.inventoryrow4);
+                _TextView4.setText(catalogues.get(position).get("Category"));
+                TextView _TextView5=(TextView)convertView.findViewById(R.id.inventoryrow5);
+                _TextView5.setText(catalogues.get(position).get("MeasureUnit"));
+                TextView _TextView6=(TextView)convertView.findViewById(R.id.inventoryrow6);
+                _TextView6.setText(catalogues.get(position).get("Price"));
+                TextView _TextView7=(TextView)convertView.findViewById(R.id.inventoryrow7);
+                _TextView7.setText(catalogues.get(position).get("BinNumber"));
+
             }
             return convertView;
         }

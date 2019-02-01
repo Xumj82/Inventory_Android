@@ -52,11 +52,9 @@ public class Department extends HashMap<String,String> {
 
     public static List<User> ReadUserByDeptID(String id) {
         List<User> list = new ArrayList<>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"/"+id);
         try {
-            for (int i =0; i<a.length(); i++) {
-                JSONObject b = a.getJSONObject(i);
-                if(b.getString("DepartmentID").equals(id)) {
+                JSONObject b = a.getJSONObject(0);
                    JSONArray  c = b.getJSONArray("AspNetUsers2");
                    for (int j=0;j<c.length();j++){
                        JSONObject d = c.getJSONObject(j);
@@ -69,8 +67,7 @@ public class Department extends HashMap<String,String> {
                                d.getString("UserType")
                        ));
                    }
-                }
-            }
+
         } catch (Exception e) {
             Log.e("User", "JSONArray error");
             e.printStackTrace();
@@ -80,7 +77,7 @@ public class Department extends HashMap<String,String> {
 
     public static List<Department> GetDisbursementList(){
         List<Department> departments = new ArrayList<>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl("https://inventory123.azurewebsites.net/StoreClerk/GetDisbursementList");
+        JSONArray a = HttpConnection.getJSONArrayFromUrl("https://lusis.azurewebsites.net/StoreClerk/GetDisbursementList");
         try{
             for(int i=0;i<a.length();i++){
                 JSONObject b = a.getJSONObject(i);

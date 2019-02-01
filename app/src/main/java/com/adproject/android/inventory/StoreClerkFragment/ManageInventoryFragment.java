@@ -5,22 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.adproject.android.inventory.Adapter.InventoryAdapter;
-import com.adproject.android.inventory.Adapter.RequestAdapter;
-import com.adproject.android.inventory.DeptHeadFragments.RequestFragment;
-import com.adproject.android.inventory.EditCatalogueActivity;
+import com.adproject.android.inventory.StoreClerkActivities.EditCatalogueActivity;
 import com.adproject.android.inventory.Entity.Catalogue;
-import com.adproject.android.inventory.Entity.Request;
 import com.adproject.android.inventory.R;
-import com.adproject.android.inventory.StoreClerkActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +39,20 @@ public class ManageInventoryFragment extends ListFragment {
         return(v);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(4).setChecked(true);
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getCatalogue();
+    }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
         Catalogue selected = (Catalogue) getListAdapter().getItem(position);

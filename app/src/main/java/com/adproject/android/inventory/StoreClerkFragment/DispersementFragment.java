@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adproject.android.inventory.Adapter.CatalogueAdapter;
+import com.adproject.android.inventory.Adapter.DisbursementAdapter;
 import com.adproject.android.inventory.Adapter.DepartmentAdapter;
 import com.adproject.android.inventory.Entity.Catalogue;
 import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.R;
 import com.adproject.android.inventory.StoreClerkActivities.SignatureActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DispersementFragment extends Fragment {
@@ -39,9 +41,11 @@ public class DispersementFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Dispersement List");
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(2).setChecked(true);
         spinner = getActivity().findViewById(R.id.spinnerDepartmentName);
         Button btnSign = getActivity().findViewById(R.id.buttonSign);
         final Intent signature = new Intent(getActivity(),SignatureActivity.class);
@@ -66,14 +70,17 @@ public class DispersementFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if(catalogueList!=null) {
+                            ArrayList<String> orderids = new ArrayList<>();
+                            String orderid = "";
                             Bundle bundle = new Bundle();
-                            int i = 1;
+                            int i = 0;
                             for (Catalogue c : catalogueList) {
-                                bundle.putSerializable("C" + i, c);
-                                i++;
+                                if(!c.get("ItemID").equals(orderid)){
+                                    orderid = c.get("ItemID");
+                                    orderids.add(orderid);
+                                }
                             }
-                            signature.putExtra("Catalogues", bundle);
-                            signature.putExtra("CataloguesSize", catalogueList.size());
+                            signature.putStringArrayListExtra("orderids",orderids);
                             startActivity(signature);
                         }else {
                             Toast.makeText(getActivity().getApplicationContext(), "wait...",
@@ -119,7 +126,7 @@ public class DispersementFragment extends Fragment {
             protected void onPostExecute(List<Catalogue> catalogues) {
                 try {
                     catalogueList = catalogues;
-                    CatalogueAdapter adapter = new CatalogueAdapter(getActivity(),catalogues);
+                    DisbursementAdapter adapter = new DisbursementAdapter(getActivity(),catalogues);
                     ListView listView = getActivity().findViewById(R.id.listDispersement);
                     listView.setAdapter(adapter);
                 }catch (Exception e){

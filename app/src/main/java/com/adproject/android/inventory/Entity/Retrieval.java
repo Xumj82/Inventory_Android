@@ -25,7 +25,7 @@ public class Retrieval extends HashMap<String,String> {
         List<Retrieval> requests = new ArrayList<>();
         try {
             JSONArray a;
-            a = HttpConnection.getJSONFromUrl("https://inventory123.azurewebsites.net/StoreClerk/GetRetrievals").getJSONArray("data");
+            a = HttpConnection.getJSONFromUrl("https://lusis.azurewebsites.net/StoreClerk/GetRetrievals").getJSONArray("data");
             for(int i =0;i<a.length();i++){
                 requests.add(new Retrieval(
                         a.getJSONObject(i).getString("requestId"),

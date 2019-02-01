@@ -5,6 +5,7 @@ import android.util.Log;
 import com.adproject.android.inventory.Connection.HttpConnection;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Request extends HashMap<String, String> {
         put("UserID",userid);
         put("UserName",username);
     }
+
 
     public static List<Request> ReadAllRequest() {
         List<Request> list = new ArrayList<Request>();

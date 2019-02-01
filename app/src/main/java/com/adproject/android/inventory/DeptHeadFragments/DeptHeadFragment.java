@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adproject.android.inventory.Adapter.UserAdapter;
+import com.adproject.android.inventory.Connection.HttpConnection;
 import com.adproject.android.inventory.Entity.Department;
 import com.adproject.android.inventory.Entity.User;
 import com.adproject.android.inventory.R;
@@ -101,12 +102,15 @@ public class DeptHeadFragment extends Fragment {
                 if(u!=null){
                     startDate=startdate.getText().toString();
                     endDate = enddate.getText().toString();
-                    if((startDate!=null)&&(endDate!=null)) {
+                    if(!(startDate.equals("")||endDate.equals(""))) {
                         Save(selcetid);
-                    }
-                    else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Please select start date and end date",
-                                Toast.LENGTH_SHORT).show();
+                    }else if(startDate.equals("")&&endDate.equals("")){
+                        startdate.setError("Please enter start date");
+                        enddate.setError("Please enter end date");
+                    }else if (startDate.equals("")) {
+                        startdate.setError("Please enter start date");
+                    }else if(endDate.equals("")){
+                        enddate.setError("Please enter end date");
                     }
                 }
                 else {
@@ -184,7 +188,7 @@ public class DeptHeadFragment extends Fragment {
                 List<User> users = new ArrayList<>();
                 for(User u : users1){
                     String type = u.get("UserType");
-                    if(!(type.equals("DeptRep"))){
+                    if(!(type.equals("DeptRep")||type.equals("DeptRep"))){
                         users.add(u);
                     }
                 }
@@ -206,35 +210,27 @@ public class DeptHeadFragment extends Fragment {
     }
 
     void Save(String id){
-        String url = "http://inventory123.azurewebsites.net/DepManager/saveDepHead?dropdown1="+id+"&date1="+startDate+"&date2="+endDate;
+        final String url = "https://lusis.azurewebsites.net/DepManager/saveDepHead?dropdown1="+id+"&date1="+startDate+"&date2="+endDate;
         new AsyncTask<String, Void,Boolean>(){
             @Override
             protected Boolean doInBackground(String... strings) {
-                try {
-                    URL u = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-                    conn.setUseCaches (true);
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.connect();
-                    if(conn.getResponseMessage().equals("OK")) {
+                    HttpConnection.getStream(url);
+                    if(HttpConnection.message.equals("OK")) {
                         return true;
                     }
                     else {
                         return false;
                     }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();return false;
-                } catch (IOException e) {
-                    e.printStackTrace();return false;
-                }
             }
             @Override
             protected void onPostExecute(Boolean aBoolean) {
-                Toast.makeText(getActivity().getApplicationContext(), aBoolean.toString(),
-                        Toast.LENGTH_SHORT).show();
+                if(aBoolean.equals(true)){
+                    Toast.makeText(getActivity().getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                    getActivity().onBackPressed();
+                }else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Server error",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }.execute(url);
     }

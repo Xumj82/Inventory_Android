@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ public class RetrievalFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(1).setChecked(true);
         getActivity().setTitle("Retrieval");
         final Intent intent = new Intent(getActivity(),RetrievalDetailsActivity.class);
         ListView listView = getActivity().findViewById(R.id.listRetireval);
@@ -52,7 +55,13 @@ public class RetrievalFragment extends Fragment {
         return view;
     }
 
-     void GetRetrievals(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        GetRetrievals();
+    }
+
+    void GetRetrievals(){
         new AsyncTask<Void,Void,List<Retrieval>>(){
 
             @Override

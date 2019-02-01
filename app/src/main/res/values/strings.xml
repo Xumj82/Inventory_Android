@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Inventory</string>
+    <string name="app_name">LogicUniversity</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Username</string>
     <string name="prompt_password">Password (optional)</string>

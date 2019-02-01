@@ -1,6 +1,7 @@
 package com.adproject.android.inventory.StoreClerkActivities;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,17 +10,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adproject.android.inventory.Connection.HttpConnection;
 import com.adproject.android.inventory.Entity.Retrieval;
 import com.adproject.android.inventory.R;
+import com.adproject.android.inventory.StoreClerkActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RetrievalDetailsActivity extends AppCompatActivity {
 
     Activity activity = this;
+    Retrieval retrieval;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storeclerk_activity_retrieval_details);
-        Retrieval retrieval = new Retrieval(
+        setTitle("Retrieval Details");
+        retrieval = new Retrieval(
                 getIntent().getExtras().getString("requestId"),
                 getIntent().getExtras().getString("itemDescription"),
                 getIntent().getExtras().getString("neededQuantity"),
@@ -46,19 +55,18 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!editText1.getText().toString().equals("")) {
-                    int pickQty = Integer.parseInt(editText1.getText().toString());
+                    String pickQty = editText1.getText().toString();
                     String remarks = editText2.getText().toString();
                     int availableQty = Integer.parseInt(textView4.getText().toString());
-                    if (pickQty < 0) {
-                        editText1.setError("cannot less than 0");
-                    } else if (pickQty > availableQty) {
-                        editText1.setError("cannot more than available quantity");
+                    if (Integer.parseInt(pickQty) < 0) {
+                        editText1.setError("Cannot less than 0");
+                    } else if (Integer.parseInt(pickQty)> availableQty) {
+                        editText1.setError("Cannot more than available quantity");
                     } else {
-                        UpdateInventory();
-                        onBackPressed();
+                        UpdateInventory(retrieval,pickQty,remarks);
                     }
                 }else {
-                    editText1.setError("Please enter pick up number");
+                    editText1.setError("Please enter pick up quantity");
                 }
             }
         });
@@ -66,8 +74,35 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
 
     }
 
-    void UpdateInventory(){
-        Toast.makeText(this.getApplicationContext(), "Update",
-                Toast.LENGTH_SHORT).show();
+    void UpdateInventory(Retrieval retrieval, final String pickup, final String remarks){
+        new AsyncTask<Retrieval, Void, String>() {
+            @Override
+            protected String doInBackground(Retrieval... retrievals) {
+                JSONArray jsonArray = new JSONArray();
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("itemDescription", retrievals[0].get("itemDescription"));
+                    jsonObject.put("quantityPicked",pickup);
+                    jsonObject.put("remarks",remarks);
+                    jsonArray.put(jsonObject);
+                    String url = "https://lusis.azurewebsites.net/StoreClerk/UpdateInventory";
+                    HttpConnection.postJSONArray(url, jsonArray);
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+                return HttpConnection.message;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                if(s.equals("OK")){
+                    onBackPressed();
+                }else {
+                    Toast.makeText(activity,"Sever error",Toast.LENGTH_LONG).show();
+                }
+                super.onPostExecute(s);
+            }
+        }.execute(retrieval);
     }
 }

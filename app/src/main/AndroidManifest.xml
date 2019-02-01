@@ -32,7 +32,7 @@
             android:name=".StoreClerkActivity"
             android:label="@string/title_activity_store_clerk"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditCatalogueActivity"></activity>
+        <activity android:name=".StoreClerkActivities.EditCatalogueActivity"></activity>
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".StoreClerkActivities.RetrievalDetailsActivity" />
         <activity android:name=".StoreClerkActivities.SignatureActivity"></activity>

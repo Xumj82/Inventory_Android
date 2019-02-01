@@ -12,38 +12,46 @@
 
     <Button
         android:id="@+id/buttonRequest"
-        android:layout_width="364dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="16dp"
-        android:text="Request"
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_selector"
+        android:text="Approve or reject Request"
         android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonDeptRep"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonDeptRep"
-        android:layout_width="362dp"
-        android:layout_height="120dp"
-        android:text="Dept Rep"
-        android:textSize="30sp"
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_selector"
+        android:text="Appoint Dept Rep"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonDeptHead"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRequest" />
 
     <Button
         android:id="@+id/buttonDeptHead"
-        android:layout_width="362dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="92dp"
-        android:text="Dept Head"
-        android:textSize="30sp"
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_selector"
+        android:text="Appoint Dept Head"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

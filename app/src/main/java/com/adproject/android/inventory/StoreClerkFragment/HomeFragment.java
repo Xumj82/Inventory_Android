@@ -20,14 +20,6 @@ public class HomeFragment extends Fragment {
     public static final String TAG = "Home";
     private View view;
 
-    public static HomeFragment newInstance(String content) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(TAG, content);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,15 +41,34 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
         fm = getFragmentManager();
         Button btnInventory = getActivity().findViewById(R.id.btnInventory);
+        Button btnRetrieval = getActivity().findViewById(R.id.buttonRetrivals);
+        Button btnDispersement = getActivity().findViewById(R.id.buttonDispersement);
         btnInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ManageInventoryFragment inventoryList = ManageInventoryFragment.newInstance("Inventory");
                 fm.beginTransaction().replace(R.id.storeclerk_content_frame, inventoryList,"Inventory").addToBackStack("Inventory").commit();
-                NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
-                navigationView.getMenu().getItem(1).setChecked(true);
+
+            }
+        });
+        btnRetrieval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RetrievalFragment inventoryList = new RetrievalFragment();
+                fm.beginTransaction().replace(R.id.storeclerk_content_frame, inventoryList,"Retrieval").addToBackStack("Retrieval").commit();
+
+            }
+        });
+        btnDispersement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DispersementFragment inventoryList = new DispersementFragment();
+                fm.beginTransaction().replace(R.id.storeclerk_content_frame, inventoryList,"Dispersement").addToBackStack("Dispersement").commit();
+
             }
         });
 

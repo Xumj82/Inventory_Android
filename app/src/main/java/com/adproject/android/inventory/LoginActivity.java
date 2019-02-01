@@ -318,7 +318,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private  String mDept;
         private Activity login;
         InputStream is = null;
-        String url = "https://inventoryaandroid.azurewebsites.net/Account/MobileLogin";
 
         UserLoginTask(String email, String password, Intent intent, Activity activity) {
             mEmail = email;

@@ -12,11 +12,11 @@ import com.adproject.android.inventory.R;
 
 import java.util.List;
 
-public class CatalogueAdapter extends BaseAdapter {
+public class DisbursementAdapter extends BaseAdapter {
     private List<Catalogue> catalogues;
     private Context mContext;
 
-    public CatalogueAdapter(Context mContext, List<Catalogue> catalogues) {
+    public DisbursementAdapter(Context mContext, List<Catalogue> catalogues) {
         this.mContext = mContext;
         this.catalogues = catalogues;
     }

@@ -1,6 +1,7 @@
 package com.adproject.android.inventory.Connection;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -16,64 +17,35 @@ import java.util.Map;
 
 public class AccountConnection {
 
-    public static final String COOKIES_HEADER = "Set-Cookie";
-    public static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+
 
     static public String login(String username,String password){
-        String s = "";
-        try {
-            String url = "https://inventory123.azurewebsites.net/Account/MobileLogin";
-            InputStream is = null;
-            URL u = new URL(url);
-            String urlParameters = "username=" + username + "&password=" + password;
-            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-            int postDataLength = postData.length;
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("charset", "utf-8");
-            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
-            conn.setUseCaches(false);
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.write(postData);
-            conn.connect();
-
-            //set-cookie
-            Map<String, List<String>> headerFields = conn.getHeaderFields();
-            List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-            if (cookiesHeader != null) {
-                for (String cookie : cookiesHeader) {
-                    msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
-                }
-            }
-
-            String a = conn.getResponseMessage();
-            is = conn.getInputStream();
-            s = HttpConnection.readStream(is);
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String url = "https://lusis.azurewebsites.net/Account/MobileLogin";
+        String urlParameters = "username=" + username + "&password=" + password;
+        String s = HttpConnection.paramConnect(url,urlParameters,"login");
         return s;
     }
 
      public void Logout(){
         new AsyncTask<Void,Void,String>(){
 
-            String url = "https://inventoryaandroid.azurewebsites.net/Account/LogOff";
+            String url = "https://lusis.azurewebsites.net/Account/LogOff";
             @Override
             protected String doInBackground(Void... voids){
                 try{
                     URL u = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                    if (HttpConnection.msCookieManager.getCookieStore().getCookies().size() > 0) {
+                        // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                        conn.setRequestProperty("Cookie",
+                                TextUtils.join(";",  HttpConnection.msCookieManager.getCookieStore().getCookies()));
+                    }
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                     conn.setRequestProperty("charset", "utf-8");
                     conn.setUseCaches(false);
                     conn.connect();
+                    String m = conn.getResponseMessage();
                 } catch (ProtocolException e) {
                     e.printStackTrace(); return "0";
                 } catch (MalformedURLException e) {
@@ -85,10 +57,6 @@ public class AccountConnection {
                 return "1";
             }
 
-            @Override
-            protected void onPostExecute(String s) {
-
-            }
         };
 
     }

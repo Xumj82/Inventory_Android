@@ -95,7 +95,7 @@ public class DetailsFragment extends Fragment {
     }
 
     void saveStatus(final List<Request> requestlist, final String remarks, final String status) {
-        final String url = "https://inventory123.azurewebsites.net/DepManager/SaveRequestStatus";
+        final String url = "https://lusis.azurewebsites.net/DepManager/SaveRequestStatus";
         new AsyncTask<String, Void,Boolean>(){
             @Override
             protected Boolean doInBackground(String... strings) {
@@ -118,13 +118,12 @@ public class DetailsFragment extends Fragment {
             @Override
             protected void onPostExecute(Boolean aBoolean) {
                 //super.onPostExecute(aBoolean);
-                try {
-                    if (aBoolean == true) {
-                    }
-                    Toast.makeText(getActivity().getApplicationContext(), aBoolean.toString(),
+                if(aBoolean.equals(true)){
+                    Toast.makeText(getActivity().getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                    getActivity().onBackPressed();
+                }else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Server error",
                             Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    e.printStackTrace();
                 }
             }
         }.execute(url);

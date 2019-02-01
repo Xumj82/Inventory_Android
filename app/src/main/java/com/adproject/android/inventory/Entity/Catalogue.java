@@ -62,7 +62,7 @@ public class Catalogue extends HashMap<String, String> implements Serializable {
         JSONObject jsonObject= new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Catalogue> catalogues = new ArrayList<>();
-        String url = "https://inventory123.azurewebsites.net/StoreClerk/GetDisbursementItems";
+        String url = "https://lusis.azurewebsites.net/StoreClerk/GetDisbursementItems";
         try {
             jsonObject.put("deptName", department.get("DepartmentName"));
             jsonArray.put(jsonObject);
@@ -70,7 +70,7 @@ public class Catalogue extends HashMap<String, String> implements Serializable {
             for(int i = 0; i < jsonArray.length(); i++){
                 jsonObject = jsonArray.getJSONObject(i);
                 catalogues.add(new Catalogue(
-                        "",
+                        jsonObject.getString("orderid"),
                         jsonObject.getString("itemDescription"),
                         jsonObject.getString("quantity"),
                         "",
@@ -87,34 +87,15 @@ public class Catalogue extends HashMap<String, String> implements Serializable {
     }
 
     public static boolean save(Catalogue catalogue){
-        try {
-            String url = "https://inventory123.azurewebsites.net/StoreClerk/UpdateInventoryBinNumber";
-            InputStream is = null;
-            URL u = new URL(url);
+            String s = null;
+            String url = "https://lusis.azurewebsites.net/StoreClerk/UpdateInventoryBinNumber";
             String urlParameters = "ItemID=" + catalogue.get("ItemID") + "&binNumber=" + catalogue.get("BinNumber");
-            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-            int postDataLength = postData.length;
-            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-
-            if (AccountConnection.msCookieManager.getCookieStore().getCookies().size() > 0) {
-                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
-                conn.setRequestProperty("Cookie",
-                        TextUtils.join(";",  AccountConnection.msCookieManager.getCookieStore().getCookies()));
+            s = HttpConnection.paramConnect(url,urlParameters,"message");
+            if (s.equals("OK")){
+                return true;
             }
+            return false;
 
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("charset", "utf-8");
-            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
-            conn.setUseCaches(false);
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.write(postData);
-            conn.connect();
-            String m = conn.getResponseMessage();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();return false;
-        }
     }
 
 }
