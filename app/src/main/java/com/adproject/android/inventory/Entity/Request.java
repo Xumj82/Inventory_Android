@@ -62,7 +62,7 @@ public class Request extends HashMap<String, String> {
     public static List<Request> ReadOrderByDept(String id) {
         List<Request> list = new ArrayList<Request>();
         List<Request> list1 = new ArrayList<Request>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL0);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"/"+id);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -85,7 +85,7 @@ public class Request extends HashMap<String, String> {
         }
 
         for(Request l : list){
-            if(l.get("Department").equals(id)){
+            if(l.get("Department").equals(id)&&l.get("Status").equals("Unapproved")){
                 list1.add(l);
             }
         }

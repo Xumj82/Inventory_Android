@@ -49,8 +49,9 @@ public class RequestFragment extends ListFragment{
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.depthead_fragment_request, container, false);
         deptid = getActivity().getIntent().getExtras().getString("dept");
+        userid = getActivity().getIntent().getExtras().getString("userid");
         getActivity().setTitle("Request List");
-        getRequests(deptid);
+        getRequests(userid);
         return view;
     }
 
