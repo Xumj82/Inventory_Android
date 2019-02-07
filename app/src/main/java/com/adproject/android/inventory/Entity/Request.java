@@ -82,7 +82,7 @@ public class Request extends HashMap<String, String> {
             Log.e("Request", "JSONArray error");
             e.printStackTrace();
         }
-        
+
 
 
         return(list);

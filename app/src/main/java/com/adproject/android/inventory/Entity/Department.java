@@ -52,7 +52,7 @@ public class Department extends HashMap<String,String> {
 
     public static List<User> ReadUserByDeptID(String id) {
         List<User> list = new ArrayList<>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"/"+id);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"?id="+id);
         try {
                 JSONObject b = a.getJSONObject(0);
                    JSONArray  c = b.getJSONArray("AspNetUsers2");

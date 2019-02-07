@@ -188,7 +188,7 @@ public class DeptHeadFragment extends Fragment {
                 List<User> users = new ArrayList<>();
                 for(User u : users1){
                     String type = u.get("UserType");
-                    if(!(type.equals("DeptRep")||type.equals("DeptRep"))){
+                    if(!(type.equals("DeptRep")||type.equals("DeptHead")||type.equals("InterimDepHead"))){
                         users.add(u);
                     }
                 }
