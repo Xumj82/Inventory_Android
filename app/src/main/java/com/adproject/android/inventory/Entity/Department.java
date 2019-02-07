@@ -52,22 +52,27 @@ public class Department extends HashMap<String,String> {
 
     public static List<User> ReadUserByDeptID(String id) {
         List<User> list = new ArrayList<>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"?id="+id);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
         try {
-                JSONObject b = a.getJSONObject(0);
-                   JSONArray  c = b.getJSONArray("AspNetUsers2");
-                   for (int j=0;j<c.length();j++){
-                       JSONObject d = c.getJSONObject(j);
-                       list.add(new User(
-                               d.getString("Name"),
-                               d.getString("UserName"),
-                               d.getString("DepartmentID"),
-                               d.getString("Id"),
-                               d.getString("Email"),
-                               d.getString("UserType")
-                       ));
-                   }
+            for(int i = 0; i < a.length();i++) {
+                JSONObject b = a.getJSONObject(i);
+                String deptid = b.getString("DepartmentID").trim();
+                if(b.getString("DepartmentID").trim().equals(id)) {
+                    JSONArray c = b.getJSONArray("AspNetUsers2");
+                    for (int j = 0; j < c.length(); j++) {
+                        JSONObject d = c.getJSONObject(j);
 
+                        list.add(new User(
+                                d.getString("Name"),
+                                d.getString("UserName"),
+                                d.getString("DepartmentID"),
+                                d.getString("Id"),
+                                d.getString("Email"),
+                                d.getString("UserType")
+                        ));
+                    }
+                }
+            }
         } catch (Exception e) {
             Log.e("User", "JSONArray error");
             e.printStackTrace();

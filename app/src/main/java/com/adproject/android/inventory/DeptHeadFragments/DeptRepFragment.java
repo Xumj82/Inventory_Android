@@ -116,7 +116,7 @@ public class DeptRepFragment extends Fragment {
                List<User> users = new ArrayList<>();
                for(User u : users1){
                    String type = u.get("UserType");
-                   if(!(type.equals("DeptHead")||type.equals("DeptRep"))){
+                   if(!(type.contains("DeptHead")||type.contains("DeptRep"))){
                        users.add(u);
                    }
                }
@@ -140,12 +140,6 @@ public class DeptRepFragment extends Fragment {
         new AsyncTask<String, Void,Boolean>(){
             @Override
             protected Boolean doInBackground(String... strings) {
-//                    URL u = new URL(strings[0]);
-////                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-////                    conn.setRequestMethod("GET");
-////                    conn.connect();
-////                    String response = conn.getResponseMessage();
-////                    conn.disconnect();
                     HttpConnection.getStream(url);
                     if(HttpConnection.message.equals("OK")) {
 

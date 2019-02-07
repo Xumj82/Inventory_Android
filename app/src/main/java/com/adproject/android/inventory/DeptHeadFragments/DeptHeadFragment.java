@@ -160,7 +160,7 @@ public class DeptHeadFragment extends Fragment {
                  List<User> users1 = Department.ReadUserByDeptID(voids[0]);
                         User user = new User("","","","","","");
                         for(User u : users1){
-                            if((u.get("UserType").equals("DeptHead"))){
+                            if((u.get("UserType").equals("InterimDepHead"))){
                                 user = u;
                             }
                         }
