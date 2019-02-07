@@ -81,7 +81,7 @@ public class Catalogue extends HashMap<String, String> implements Serializable {
 
                 ));
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return catalogues;

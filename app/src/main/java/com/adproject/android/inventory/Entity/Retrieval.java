@@ -37,7 +37,7 @@ public class Retrieval extends HashMap<String,String> {
                         a.getJSONObject(i).getString("orderid")
                 ));
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return  requests;

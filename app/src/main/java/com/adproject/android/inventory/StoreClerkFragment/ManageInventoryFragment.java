@@ -10,7 +10,10 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.adproject.android.inventory.Adapter.InventoryAdapter;
 import com.adproject.android.inventory.StoreClerkActivities.EditCatalogueActivity;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class ManageInventoryFragment extends ListFragment {
     public static final String TAG = "content";
+    static List<Catalogue> catalogues;
 
     public static ManageInventoryFragment newInstance(String content) {
         ManageInventoryFragment fragment = new ManageInventoryFragment();
@@ -32,10 +36,30 @@ public class ManageInventoryFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.storeclerk_fragment_inventory, container, false);
         getActivity().setTitle("Inventory List");
+        final EditText searchContent = getActivity().findViewById(R.id.editSearchInventory);
+        Button searchbtn = getActivity().findViewById(R.id.buttonSearch);
+        final List<Catalogue> catalogueList = new ArrayList<>();
         getCatalogue();
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(searchContent.getText().toString()==null){
+                    getCatalogue();
+                }else {
+                    if(!(catalogues==null)) {
+                        for (Catalogue catalogue : catalogues) {
+                           if(catalogue.get("Description").contains(searchContent.getText().toString())){
+                               catalogueList.add(catalogue);
+                            }
+                        }
+                        InventoryAdapter adapter = new InventoryAdapter(getContext(), catalogueList);
+                    }
+                }
+            }
+        });
         return(v);
     }
 
@@ -72,15 +96,17 @@ public class ManageInventoryFragment extends ListFragment {
             @Override
             protected List<Catalogue> doInBackground(Void... voids) {
                 List<Catalogue> catalogueList = new ArrayList<Catalogue>();
-                catalogueList = Catalogue.listCatalogues();
-                return  catalogueList;
+                 return Catalogue.listCatalogues();
+
             }
 
             @Override
             protected void onPostExecute(List<Catalogue> result) {
                 try {
-                    InventoryAdapter adapter = new InventoryAdapter(getActivity(),result);
-                    setListAdapter(adapter);
+                        catalogues = result;
+                        InventoryAdapter adapter = new InventoryAdapter(getActivity(), result);
+                        setListAdapter(adapter);
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }

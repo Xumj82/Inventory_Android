@@ -25,7 +25,11 @@ public class SignatureActivity extends AppCompatActivity {
         setTitle("Signature Pad");
         final List<String> orderid = getIntent().getExtras().getStringArrayList("orderids");
         final SignaturePad signaturePad = findViewById(R.id.signaturePad);
-        getSignature(orderid.get(0),signaturePad);
+        try {
+            getSignature(orderid.get(0), signaturePad);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         Button btnClear = findViewById(R.id.buttonClear);
         Button btnSave = findViewById(R.id.buttonSignSave);
         final Activity activity = this;

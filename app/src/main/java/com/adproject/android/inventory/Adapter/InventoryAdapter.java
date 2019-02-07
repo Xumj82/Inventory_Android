@@ -14,7 +14,7 @@ import com.adproject.android.inventory.R;
 
 import java.util.List;
 
-public class InventoryAdapter extends BaseAdapter implements Filterable {
+public class InventoryAdapter extends BaseAdapter{
         private List<Catalogue> catalogues;
         private Context mContext;
 
@@ -62,10 +62,8 @@ public class InventoryAdapter extends BaseAdapter implements Filterable {
             return convertView;
         }
 
-        @Override
-        public Filter getFilter() {
-            return null;
-        }
+
+
     }
 
 
