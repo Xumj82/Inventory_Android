@@ -15,6 +15,7 @@ import java.util.List;
 public class Request extends HashMap<String, String> {
     static String host = "inventorywebapi2019.azurewebsites.net";
     static String baseURL = String.format("http://%s/api/PendingRequest", host);
+    static String baseURL0 = String.format("http://%s/api/Request", host);
 
     public Request(String requestid, String item, String status,String employee,String dept,String orderid,String date,String qty,String remarks,String userid,String username) {
         put("RequestID", requestid);
@@ -33,7 +34,7 @@ public class Request extends HashMap<String, String> {
 
     public static List<Request> ReadAllRequest() {
         List<Request> list = new ArrayList<Request>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL0);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
@@ -61,7 +62,7 @@ public class Request extends HashMap<String, String> {
     public static List<Request> ReadOrderByDept(String id) {
         List<Request> list = new ArrayList<Request>();
         List<Request> list1 = new ArrayList<Request>();
-        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL);
+        JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL0);
         try {
             for (int i =0; i<a.length(); i++) {
                 JSONObject b = a.getJSONObject(i);
