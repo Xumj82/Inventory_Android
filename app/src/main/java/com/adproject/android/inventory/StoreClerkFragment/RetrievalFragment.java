@@ -12,16 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.adproject.android.inventory.Adapter.RetrievalListAdapter;
 import com.adproject.android.inventory.Entity.Retrieval;
 import com.adproject.android.inventory.R;
 import com.adproject.android.inventory.StoreClerkActivities.RetrievalDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RetrievalFragment extends Fragment {
     private View view;
+    ListView listView;
+    static List<Retrieval> retrievalList;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class RetrievalFragment extends Fragment {
         navigationView.getMenu().getItem(1).setChecked(true);
         getActivity().setTitle("Retrieval");
         final Intent intent = new Intent(getActivity(),RetrievalDetailsActivity.class);
-        ListView listView = getActivity().findViewById(R.id.listRetireval);
+        listView = getActivity().findViewById(R.id.listRetireval);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -45,13 +49,40 @@ public class RetrievalFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        final List<Retrieval> retrievals = new ArrayList<>();
+        final SearchView searchView = getActivity().findViewById(R.id.searchRetrieval);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(!(retrievalList==null)){
+                    retrievals.clear();
+                    for(Retrieval retrieval : retrievalList){
+                        if(retrieval.get("requestId").contains(searchView.getQuery().toString())||retrieval.get("itemDescription").contains(searchView.getQuery().toString())){
+                            retrievals.add(retrieval);
+                        }
+                    }
+                    try {
+                        RetrievalListAdapter retrievalListAdapter = new RetrievalListAdapter(getActivity(), retrievals);
+                        listView.setAdapter(retrievalListAdapter);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.storeclerk_fragment_retrieval, container, false);
-        this.GetRetrievals();
+        GetRetrievals();
         return view;
     }
 
@@ -72,8 +103,9 @@ public class RetrievalFragment extends Fragment {
             @Override
             protected void onPostExecute(List<Retrieval> retrievals) {
                 try {
+                    retrievalList = retrievals;
                     RetrievalListAdapter retrievalListAdapter = new RetrievalListAdapter(getActivity(), retrievals);
-                    ListView listView = getActivity().findViewById(R.id.listRetireval);
+                    listView = getActivity().findViewById(R.id.listRetireval);
                     listView.setAdapter(retrievalListAdapter);
                 }catch (Exception e){
                     e.printStackTrace();

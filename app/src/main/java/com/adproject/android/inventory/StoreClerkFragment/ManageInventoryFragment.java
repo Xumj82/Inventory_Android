@@ -39,35 +39,42 @@ public class ManageInventoryFragment extends ListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.storeclerk_fragment_inventory, container, false);
         getActivity().setTitle("Inventory List");
-        final EditText searchContent = getActivity().findViewById(R.id.editSearchInventory);
-        Button searchbtn = getActivity().findViewById(R.id.buttonSearch);
-        final List<Catalogue> catalogueList = new ArrayList<>();
-        getCatalogue();
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(searchContent.getText().toString()==null){
-                    getCatalogue();
-                }else {
-                    if(!(catalogues==null)) {
-                        for (Catalogue catalogue : catalogues) {
-                           if(catalogue.get("Description").contains(searchContent.getText().toString())){
-                               catalogueList.add(catalogue);
-                            }
-                        }
-                        InventoryAdapter adapter = new InventoryAdapter(getContext(), catalogueList);
-                    }
-                }
-            }
-        });
         return(v);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(4).setChecked(true);
+        final SearchView searchView = getActivity().findViewById(R.id.searchView);
+        final List<Catalogue> catalogueList = new ArrayList<>();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(!(catalogues==null)) {
+                        catalogueList.clear();
+                        for (Catalogue catalogue : catalogues) {
+                            if(catalogue.get("Description").contains(searchView.getQuery().toString())){
+                                catalogueList.add(catalogue);
+                            }
+                        }
+                        try {
+                            InventoryAdapter adapter = new InventoryAdapter(getContext(), catalogueList);
+                            setListAdapter(adapter);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
     }
 
