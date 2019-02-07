@@ -61,7 +61,6 @@ public class Request extends HashMap<String, String> {
 
     public static List<Request> ReadOrderByDept(String id) {
         List<Request> list = new ArrayList<Request>();
-        List<Request> list1 = new ArrayList<Request>();
         JSONArray a = HttpConnection.getJSONArrayFromUrl(baseURL+"/"+id);
         try {
             for (int i =0; i<a.length(); i++) {
@@ -83,15 +82,10 @@ public class Request extends HashMap<String, String> {
             Log.e("Request", "JSONArray error");
             e.printStackTrace();
         }
-
-        for(Request l : list){
-            if(l.get("Department").equals(id)&&l.get("Status").equals("Unapproved")){
-                list1.add(l);
-            }
-        }
+        
 
 
-        return(list1);
+        return(list);
     }
 
     public static List<Request> ReadRequestByOrderIDUserID(String id,String userid) {

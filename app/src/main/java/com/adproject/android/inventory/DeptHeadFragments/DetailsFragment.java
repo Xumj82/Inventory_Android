@@ -71,8 +71,6 @@ public class DetailsFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                 }else{
                             saveStatus(requests,"","Approved");
-                            Toast.makeText(getActivity().getApplicationContext(),"success.",
-                            Toast.LENGTH_SHORT).show();
                       }
 
                 }
@@ -104,11 +102,11 @@ public class DetailsFragment extends Fragment {
                 List<JSONObject> body = new ArrayList<>();
                 for(Request r : requestlist)
                 {
-                    JSONObject J1 = new JSONObject();
-                    J1.put("orderId", r.get("OrderID"));
-                    J1.put("requestStatus", status);
-                    J1.put("reason",remarks);
-                    body.add(J1);
+                        JSONObject J1 = new JSONObject();
+                        J1.put("orderId", r.get("RequestID"));
+                        J1.put("requestStatus", status);
+                        J1.put("reason", remarks);
+                        body.add(J1);
                 }
                 return HttpConnection.postJSONObject(url,body);
               } catch (JSONException e) {
@@ -119,7 +117,7 @@ public class DetailsFragment extends Fragment {
             protected void onPostExecute(Boolean aBoolean) {
                 //super.onPostExecute(aBoolean);
                 if(aBoolean.equals(true)){
-                    Toast.makeText(getActivity().getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(),"Processing",Toast.LENGTH_SHORT).show();
                     getActivity().onBackPressed();
                 }else {
                     Toast.makeText(getActivity().getApplicationContext(), "Server error",
