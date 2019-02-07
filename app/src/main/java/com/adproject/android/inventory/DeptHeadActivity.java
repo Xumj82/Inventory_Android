@@ -158,8 +158,8 @@ public class DeptHeadActivity extends AppCompatActivity implements NavigationVie
             AccountConnection accountConnection = new AccountConnection();
             accountConnection.Logout();
             final Intent login = new Intent(this,LoginActivity.class);
-            startActivity(login);
             finish();
+            startActivity(login);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

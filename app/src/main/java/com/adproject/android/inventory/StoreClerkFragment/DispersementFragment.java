@@ -97,7 +97,11 @@ public class DispersementFragment extends Fragment {
 
             @Override
             protected List<Department> doInBackground(Void... voids) {
-                return Department.GetDisbursementList();
+                List<Department> departments = new ArrayList<>();
+                    for (Department department : Department.GetDisbursementList()) {
+                        departments.add(department);
+                    }
+                    return departments;
             }
 
             @Override

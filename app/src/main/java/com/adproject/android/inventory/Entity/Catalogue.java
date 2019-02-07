@@ -54,6 +54,7 @@ public class Catalogue extends HashMap<String, String> implements Serializable {
             }
         } catch (Exception e) {
             Log.e("User", "JSONArray error");
+            e.printStackTrace();
         }
         return (list);
     }

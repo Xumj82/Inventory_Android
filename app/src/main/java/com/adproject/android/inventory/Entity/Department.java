@@ -78,22 +78,22 @@ public class Department extends HashMap<String,String> {
     public static List<Department> GetDisbursementList(){
         List<Department> departments = new ArrayList<>();
         JSONArray a = HttpConnection.getJSONArrayFromUrl("https://lusis.azurewebsites.net/StoreClerk/GetDisbursementList");
-        try{
-            for(int i=0;i<a.length();i++){
-                JSONObject b = a.getJSONObject(i);
-                departments.add(new Department("",
-                        b.getString("representative"),
-                        "",
-                        b.getString("departmentName"),
-                        b.getString("collectionPoint"),
-                        "",
-                        ""
+            try {
+                for (int i = 0; i < a.length(); i++) {
+                    JSONObject b = a.getJSONObject(i);
+                    departments.add(new Department("",
+                            b.getString("representative"),
+                            "",
+                            b.getString("departmentName"),
+                            b.getString("collectionPoint"),
+                            "",
+                            ""
 
-                ));
+                    ));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         return departments;
 
     }

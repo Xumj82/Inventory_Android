@@ -3,6 +3,10 @@ package com.adproject.android.inventory.Connection;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +26,8 @@ public class AccountConnection {
 
     static public String login(String username,String password){
         String url = "https://lusis.azurewebsites.net/Account/MobileLogin";
-        String urlParameters = "username=" + username + "&password=" + password;
-        String s = HttpConnection.paramConnect(url,urlParameters,"login");
+        String param = "username="+username+"&password="+password;
+        String s = HttpConnection.paramConnect(url,param,"login");
         return s;
     }
 
