@@ -7,17 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.adproject.android.inventory.Connection.HttpConnection;
-import com.adproject.android.inventory.Entity.Catalogue;
 import com.adproject.android.inventory.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
 import java.util.List;
 
 public class SignatureActivity extends AppCompatActivity {
-
+    Button btnSave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,7 @@ public class SignatureActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Button btnClear = findViewById(R.id.buttonClear);
-        Button btnSave = findViewById(R.id.buttonSignSave);
+        btnSave = findViewById(R.id.buttonSignSave);
         final Activity activity = this;
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,15 +73,18 @@ public class SignatureActivity extends AppCompatActivity {
     }
 
     void addsignatureToDB(final Bitmap sign, final List<String> ids, final Activity activity){
-        new AsyncTask<Bitmap, Void, String>() {
+        new AsyncTask<Bitmap,Integer, String>() {
             @Override
             protected String doInBackground(Bitmap... bitmaps) {
+                publishProgress(View.VISIBLE);
                 String idlist = "id0="+ids.get(0);
                 for(int i =1;i<ids.size();i++){
                     idlist = idlist+"&id"+i+"="+ids.get(i);
                 }
                 String url = "https://lusis.azurewebsites.net/StoreClerk/SaveImage?"+idlist;
-                return HttpConnection.postStream(url, bitmaps[0]);
+                String s = HttpConnection.postStream(url, bitmaps[0]);
+                publishProgress(View.INVISIBLE);
+                return s;
             }
 
             @Override
@@ -94,6 +96,18 @@ public class SignatureActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(activity, "Fail", Toast.LENGTH_LONG).show();
                 }
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                ProgressBar progressBar = findViewById(R.id.progressBarSign);
+                progressBar.setVisibility(values[0]);
+                if(values[0].equals(View.VISIBLE)){
+                    btnSave.setEnabled(false);
+                }else if(values[0].equals(View.INVISIBLE)){
+                    btnSave.setEnabled(true);
+                }
+
             }
         }.execute(sign);
 

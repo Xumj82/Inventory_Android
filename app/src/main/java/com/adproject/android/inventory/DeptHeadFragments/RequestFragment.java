@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.adproject.android.inventory.Adapter.RequestAdapter;
@@ -81,6 +82,7 @@ public class RequestFragment extends ListFragment{
         new AsyncTask<String, Integer, List<Request>>() {
             @Override
             protected List<Request> doInBackground(String... params) {
+                publishProgress(View.VISIBLE);
                 List<Request> l1 = new ArrayList<>();
                 List<Request> l2 = new ArrayList<>();
                 List<Request> l3 = new ArrayList<>();
@@ -91,6 +93,7 @@ public class RequestFragment extends ListFragment{
                         l3.add(r);
                     }
                 }
+                publishProgress(View.INVISIBLE);
                 return  l3;
             }
 
@@ -103,6 +106,12 @@ public class RequestFragment extends ListFragment{
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                ProgressBar progressBar = getActivity().findViewById(R.id.progressBar);
+                progressBar.setVisibility(values[0]);
             }
         }.execute(id);
 

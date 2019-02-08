@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
 
     Activity activity = this;
     Retrieval retrieval;
+    Button btnUpdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
         textView4.setText(retrieval.get("availableQuantity"));
         textView5.setText(retrieval.get("binNumber"));
 
-        Button btnUpdate = findViewById(R.id.buttonUpdateInventory);
+        btnUpdate = findViewById(R.id.buttonUpdateInventory);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +77,10 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
     }
 
     void UpdateInventory(Retrieval retrieval, final String pickup, final String remarks){
-        new AsyncTask<Retrieval, Void, String>() {
+        new AsyncTask<Retrieval, Integer, String>() {
             @Override
             protected String doInBackground(Retrieval... retrievals) {
+                publishProgress(View.VISIBLE);
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject();
                 try {
@@ -91,6 +94,7 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
 
                     e.printStackTrace();
                 }
+                publishProgress(View.INVISIBLE);
                 return HttpConnection.message;
             }
 
@@ -102,6 +106,17 @@ public class RetrievalDetailsActivity extends AppCompatActivity {
                     Toast.makeText(activity,"Sever error",Toast.LENGTH_LONG).show();
                 }
                 super.onPostExecute(s);
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                ProgressBar progressBar = findViewById(R.id.progressBarRetrievalDetail);
+                progressBar.setVisibility(values[0]);
+                if(values[0].equals(View.VISIBLE)){
+                    btnUpdate.setEnabled(false);
+                }else if(values[0].equals(View.INVISIBLE)){
+                    btnUpdate.setEnabled(true);
+                }
             }
         }.execute(retrieval);
     }

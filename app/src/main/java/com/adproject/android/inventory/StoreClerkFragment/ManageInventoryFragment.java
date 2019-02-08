@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.adproject.android.inventory.Adapter.InventoryAdapter;
@@ -46,7 +47,7 @@ public class ManageInventoryFragment extends ListFragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(4).setChecked(true);
+        navigationView.getMenu().getItem(3).setChecked(true);
         final SearchView searchView = getActivity().findViewById(R.id.searchView);
         final List<Catalogue> catalogueList = new ArrayList<>();
 
@@ -99,12 +100,14 @@ public class ManageInventoryFragment extends ListFragment {
     }
 
     private  void  getCatalogue(){
-        new AsyncTask<Void, Void, List<Catalogue>>() {
+        new AsyncTask<Void, Integer, List<Catalogue>>() {
             @Override
             protected List<Catalogue> doInBackground(Void... voids) {
+                publishProgress(View.VISIBLE);
                 List<Catalogue> catalogueList = new ArrayList<Catalogue>();
-                 return Catalogue.listCatalogues();
-
+                catalogueList = Catalogue.listCatalogues();
+                publishProgress(View.INVISIBLE);
+                 return catalogueList;
             }
 
             @Override
@@ -118,6 +121,13 @@ public class ManageInventoryFragment extends ListFragment {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                ProgressBar progressBar = getActivity().findViewById(R.id.progressBar2);
+                progressBar.setVisibility(values[0]);
+            }
+
         }.execute();
     }
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.adproject.android.inventory.Adapter.RetrievalListAdapter;
@@ -93,11 +94,14 @@ public class RetrievalFragment extends Fragment {
     }
 
     void GetRetrievals(){
-        new AsyncTask<Void,Void,List<Retrieval>>(){
+        new AsyncTask<Void,Integer,List<Retrieval>>(){
 
             @Override
             protected List<Retrieval> doInBackground(Void... voids) {
-                return Retrieval.GetRetrievals();
+                publishProgress(View.VISIBLE);
+                List<Retrieval> retrievals = Retrieval.GetRetrievals();
+                publishProgress(View.INVISIBLE);
+                return retrievals;
             }
 
             @Override
@@ -112,6 +116,12 @@ public class RetrievalFragment extends Fragment {
                 }
 
             }
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                ProgressBar progressBar = getActivity().findViewById(R.id.progressBar2);
+                progressBar.setVisibility(values[0]);
+            }
+
         }.execute();
     }
 

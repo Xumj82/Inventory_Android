@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 import com.adproject.android.inventory.R;
@@ -43,6 +44,8 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
+        ProgressBar progressBar = getActivity().findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.GONE);
         fm = getFragmentManager();
         Button btnInventory = getActivity().findViewById(R.id.btnInventory);
         Button btnRetrieval = getActivity().findViewById(R.id.buttonRetrivals);

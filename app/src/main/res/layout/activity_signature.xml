@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".StoreClerkActivities.SignatureActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarSign"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.github.gcacace.signaturepad.views.SignaturePad
         android:id="@+id/signaturePad"
         android:layout_width="0dp"
